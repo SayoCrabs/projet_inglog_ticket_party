@@ -12,4 +12,16 @@ export class LayoutConnectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  connectForUser() {
+    /**
+     * check on bdd user if the user exist
+     */
+  }
+
+  connectForProUser() {
+    /**
+     * check on bdd proUser if the pro user exist
+     */
+  }
+
 }

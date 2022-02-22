@@ -1,1 +1,19 @@
-<p>layout-connection works!</p>
+<mat-card class="layoutConnexion mt-4">
+  <mat-card-title>Bienvenue sur MyApp !</mat-card-title>
+
+  <mat-divider inset ></mat-divider>
+
+  <mat-card-content class="mt-4">
+    <app-input-field [title]="'Identifiant'"></app-input-field>
+  </mat-card-content>
+  <mat-card-content>
+    <app-input-field [title]="'Mot de passe'" [isPasswordField]="true"></app-input-field>
+  </mat-card-content>
+
+  <mat-divider inset></mat-divider>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="connectForUser()">Connection</button>
+    <button mat-raised-button color="accent" (click)="connectForProUser()">Pro-connection</button>
+  </mat-card-actions>
+</mat-card>

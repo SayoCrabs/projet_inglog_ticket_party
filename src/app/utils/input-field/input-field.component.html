@@ -1,1 +1,5 @@
-<p>input-field works!</p>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>{{ title }}</mat-label>
+  <input matInput *ngIf="!isPasswordField" type="text" required/>
+  <input matInput *ngIf="isPasswordField" type="password" required>
+</mat-form-field>
