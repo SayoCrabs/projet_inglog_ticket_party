@@ -1,5 +1,6 @@
 <form>
-  <mat-form-field>
-    
-  </mat-form-field>
+    <section *ngFor="let field of form$ | async">
+      <app-input-field [classForm]="'outline'" [title]="field.name" [type]="field.type"></app-input-field>
+    </section>
 </form>
+

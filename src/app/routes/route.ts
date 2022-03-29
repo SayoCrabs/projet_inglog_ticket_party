@@ -3,7 +3,7 @@ import {LayoutConnectionComponent} from "../components/layout-connection/layout-
 import {HomePageComponent} from "../components/home-page/home-page.component";
 
 export const routes : Routes = [
-  { path: 'layout-connection-component', component: LayoutConnectionComponent },
-  { path: 'home-page-component', component: HomePageComponent }
-
+  { path: 'connection', component: LayoutConnectionComponent },
+  { path: 'inscription', component: LayoutConnectionComponent },
+  { path: '', component: HomePageComponent }
 ];

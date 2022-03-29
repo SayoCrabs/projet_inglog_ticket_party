@@ -17,12 +17,14 @@ export class LayoutConnectionComponent implements OnInit {
     /**
      * check on bdd user if the user exist
      */
+    localStorage.setItem('isProUserOrUser', 'user');
   }
 
   connectForProUser() {
     /**
      * check on bdd proUser if the pro user exist
      */
+    localStorage.setItem('isProUserOrUser', 'proUser');
   }
 
 }

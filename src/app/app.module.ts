@@ -18,36 +18,49 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from "@angular/common";
 import {RouterModule} from "@angular/router";
 import { HomePageComponent } from './components/home-page/home-page.component';
+import {NgxsModule} from "@ngxs/store";
+import {routes} from "./routes/route";
+import {ngxsStates} from "./utils/states-declarations/states";
+import {FormsModule} from "@angular/forms";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {FormService} from "./request/form/service/form.service";
+import { HttpClientModule } from '@angular/common/http';
+
+const material = [ MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule
+];
+
+const components = [AppComponent,
+  LayoutConnectionComponent,
+  InputFieldComponent,
+  CreateFormComponent,
+  HeaderComponent,
+  HomePageComponent]
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LayoutConnectionComponent,
-    InputFieldComponent,
-    CreateFormComponent,
-    HeaderComponent,
-    HomePageComponent
+    ...components
   ],
-  imports: [
-    RouterModule.forRoot([
-      { path: 'connection', component: LayoutConnectionComponent },
-      { path: '', component: HomePageComponent }
-
-    ]),
-    BrowserModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    NgbModule
-  ],
-  providers: [],
-  exports: [RouterModule],
+    imports: [
+        BrowserModule,
+        CommonModule,
+        RouterModule.forRoot(routes),
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ...material,
+        NgbModule,
+        NgxsModule.forRoot([...ngxsStates]),
+        MatDatepickerModule
+    ],
+  providers: [ FormService],
+  exports: [RouterModule,...components ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
