@@ -4,7 +4,7 @@ export class LoadFormFields
 {
   static readonly type = LOAD_FORM;
 
-  constructor()
+  constructor(public formToLoad: string)
   {
   }
 }

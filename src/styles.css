@@ -12,3 +12,13 @@ body
   background-color: rebeccapurple;
   color: white;
 }
+
+.green {
+  background-color: green;
+  color: white;
+}
+
+.yellow {
+  background-color: #ffd740;
+  color: black;
+}

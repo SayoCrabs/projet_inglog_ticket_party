@@ -6,12 +6,12 @@ import {Field} from "../../../utils/models/field";
 @Injectable({ providedIn: 'root' })
 export class FormService {
 
-  url = 'assets/form.json';
+  url = 'assets/';
 
   constructor(private http: HttpClient) {
   }
-  public loadForm(): Observable<Field[]>
+  public loadForm(formToLoad: string): Observable<Field[]>
   {
-    return this.http.get<Field[]>(this.url);
+    return this.http.get<Field[]>(this.url + formToLoad);
   }
 }

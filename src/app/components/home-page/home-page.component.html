@@ -1,14 +1,14 @@
-<ng-container *ngIf="(tickets$ | async) as ticket">
-<mat-card *ngFor="let ticket of (tickets$ |async)">
-  <mat-card-header>
-    {{ ticket.title}}
-  </mat-card-header>
-  <mat-card-content>
-    {{ticket.price}}
-  </mat-card-content>
-</mat-card>
-
+<ng-container *ngIf="isProUser()">
+  <app-button (clickMethod)="newTicket()" [colorBtn]="'yellow'" class="addTicket" [textButton]="'Ajouter un ticket'"></app-button>
 </ng-container>
-<mat-card>
-  <app-create-form></app-create-form>
-</mat-card>
+
+<ng-container *ngIf="(tickets$ | async) as ticket">
+  <mat-card *ngFor="let ticket of (tickets$ |async)">
+    <mat-card-header>
+      {{ ticket.title}}
+    </mat-card-header>
+    <mat-card-content>
+      {{ticket.price}}
+    </mat-card-content>
+  </mat-card>
+</ng-container>

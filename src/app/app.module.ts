@@ -25,8 +25,11 @@ import {FormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {FormService} from "./request/form/service/form.service";
 import { HttpClientModule } from '@angular/common/http';
+import { ButtonComponent } from './utils/button/button.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 const material = [ MatCardModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
   MatListModule,
@@ -44,7 +47,8 @@ const components = [AppComponent,
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
+    ButtonComponent
   ],
     imports: [
         BrowserModule,

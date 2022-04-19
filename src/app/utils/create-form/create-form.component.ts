@@ -1,9 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {Select, Store} from "@ngxs/store";
 import {FormState} from "../../request/form/state/form.state";
 import {Observable} from "rxjs";
 import {LoadFormFields} from "../../request/form/action/form.action";
 import {Field} from "../models/field";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+
+export interface DialogData {
+  name: string;
+  formToLoad: string;
+  ev: EventEmitter<any>;
+}
 
 @Component({
   selector: 'app-create-form',
@@ -12,15 +19,14 @@ import {Field} from "../models/field";
 })
 export class CreateFormComponent implements OnInit {
 
-  @Input() formToLoad: string | null = null;
   @Select(FormState.form) form$: Observable<Field[]> | undefined;
+  @Output() submitMethod: EventEmitter<any> = new EventEmitter();
 
-  constructor(private store: Store) { }
+  constructor(private store: Store,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
-
-  if(!!this.formToLoad) this.store.dispatch(new LoadFormFields());
+  if(!!this.data.formToLoad) this.store.dispatch(new LoadFormFields(this.data.formToLoad));
 
   }
-
 }

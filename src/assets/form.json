@@ -14,5 +14,9 @@
   {
     "name": "date de commencement",
     "type": "Date"
+  },
+  {
+    "name": "nb de ticket",
+    "type": "Integer"
   }
 ]

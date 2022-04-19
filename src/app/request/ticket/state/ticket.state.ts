@@ -1,8 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Ticket} from "../../../utils/models/Ticket";
-import {LoadAllTickets} from "../action/ticket.action";
-import {Observable} from "rxjs";
+import {CreateTicket, DeleteTicket, LoadAllTickets, UpdateTicket} from "../action/ticket.action";
 import {GenericState} from "../../../utils/models/GenericState";
 
 export interface TicketStateModel
@@ -49,6 +48,54 @@ export class TicketState extends GenericState
   }
 
   LoadAllTicketsError(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  @Action(CreateTicket)
+  CreateTicket(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  CreateTicketSuccess(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  CreateTicketError(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  @Action(DeleteTicket)
+  DeleteTicket(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  DeleteTicketSuccess(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  DeleteTicketError(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  @Action(UpdateTicket)
+  UpdateTicket(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  UpdateTicketSuccess(ctx: StateContext<TicketStateModel>)
+  {
+
+  }
+
+  UpdateTicketError(ctx: StateContext<TicketStateModel>)
   {
 
   }

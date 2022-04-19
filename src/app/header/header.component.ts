@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CreateFormComponent} from "../utils/create-form/create-form.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  signIn() {
+    const dialogRef = this.dialog.open(CreateFormComponent, {
+      width: '300px',
+      height: '500px',
+      data: {name: "Inscrivez-vous !", formToLoad : 'signIn.json', ev: this.submitMethod()},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  submitMethod(){}
 }

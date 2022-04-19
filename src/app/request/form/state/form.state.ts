@@ -44,7 +44,7 @@ export class FormState extends GenericState
   @Action(LoadFormFields)
   LoadFormFields(ctx: StateContext<FormStateModel>, action: LoadFormFields)
   {
-    return this.formService.loadForm().pipe(tap((result) => {
+    return this.formService.loadForm(action.formToLoad).pipe(tap((result) => {
       const state = ctx.getState();
       ctx.setState({
         ...state,
