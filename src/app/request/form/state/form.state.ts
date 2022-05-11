@@ -6,8 +6,7 @@ import {FormService} from "../service/form.service";
 import {Field} from "../../../utils/models/field";
 import {tap} from "rxjs/operators";
 
-export interface FormStateModel
-{
+export interface FormStateModel {
   form: Field[];
   creating: boolean;
   created: boolean;
@@ -16,50 +15,37 @@ export interface FormStateModel
 
 export const FormInitialState = {
   form: [],
-  creating: false,
-  created: false,
   translatedError: null,
   ...GenericState.init()
 };
 
-@State<FormStateModel>({
+@State({
   name: 'form',
   defaults: FormInitialState
 })
 
 @Injectable()
-export class FormState extends GenericState
-{
+export class FormState extends GenericState {
 
   constructor(private formService: FormService) {
     super();
   }
 
   @Selector()
-  static form(state: FormStateModel): Field[]
-  {
+  static form(state: FormStateModel): Field[] {
     return state.form;
   }
 
   @Action(LoadFormFields)
   LoadFormFields(ctx: StateContext<FormStateModel>, action: LoadFormFields)
   {
-    return this.formService.loadForm(action.formToLoad).pipe(tap((result) => {
-      const state = ctx.getState();
-      ctx.setState({
-        ...state,
-        form: result,
-      });
-    }));
-  }
-
-  LoadFormFieldsSuccess(ctx: StateContext<FormStateModel>)
-  {
-
-  }
-
-  LoadFormFieldsError(ctx: StateContext<FormStateModel>)
-  {
-
+    return this.formService.loadForm(action.formToLoad).pipe(
+      tap((result) => {
+        const state = ctx.getState();
+        ctx.setState({
+          ...state,
+          form: result,
+        });
+      }));
   }
 }

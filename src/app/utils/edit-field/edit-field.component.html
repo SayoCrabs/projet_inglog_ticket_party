@@ -1,0 +1,26 @@
+<!-- Input editable -->
+<div *ngIf="isEditable">
+  <div *ngIf="formInput">
+    <app-input-field [classForm]="classForm" [title]="title" [type]="type" [control]="control"></app-input-field>
+  </div>
+  <!-- Buttons used through content editing process -->
+  <div *ngIf="isEditable && !formInput" class="d-flex justify-content-end my-4">
+
+    <button *ngIf="!isEditing" class="btn-flat" (click)="switchEditMode()">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button *ngIf="isEditing" class="btn-flat" (click)="validateValue()">
+      <mat-icon>check</mat-icon>
+    </button>
+
+    <button *ngIf="isEditing" class="btn-flat" (click)="switchEditMode()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- Just display the data on a textField -->
+<div *ngIf="!isEditable">
+  <app-text-field [title]="title" [value]="value"></app-text-field>
+</div>

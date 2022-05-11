@@ -16,7 +16,7 @@ export const proUserConnectionInitialState = {
 })
 
 @Injectable()
-export class ProUserConnectionState
+export class ConnectionState
 {
   /*@Selector()
   static discussions(state: DiscussionsStateModel): Discussion[]

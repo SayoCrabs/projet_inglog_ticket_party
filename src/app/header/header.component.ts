@@ -17,8 +17,8 @@ export class HeaderComponent implements OnInit {
   signIn() {
     const dialogRef = this.dialog.open(CreateFormComponent, {
       width: '300px',
-      height: '500px',
-      data: {name: "Inscrivez-vous !", formToLoad : 'signIn.json', ev: this.submitMethod()},
+      height: '100%',
+      data: {name: "Inscrivez-vous !", formToLoad : 'signIn.json', type: 2},
     });
 
     dialogRef.afterClosed().subscribe(result => {

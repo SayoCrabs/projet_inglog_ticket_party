@@ -21,12 +21,14 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import {NgxsModule} from "@ngxs/store";
 import {routes} from "./routes/route";
 import {ngxsStates} from "./utils/states-declarations/states";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {FormService} from "./request/form/service/form.service";
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from './utils/button/button.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { TextFieldComponent } from './utils/text-field/text-field.component';
+import { EditFieldComponent } from './utils/edit-field/edit-field.component';
 
 const material = [ MatCardModule,
   MatDialogModule,
@@ -48,7 +50,9 @@ const components = [AppComponent,
 @NgModule({
   declarations: [
     ...components,
-    ButtonComponent
+    ButtonComponent,
+    TextFieldComponent,
+    EditFieldComponent
   ],
     imports: [
         BrowserModule,
@@ -61,11 +65,12 @@ const components = [AppComponent,
         ...material,
         NgbModule,
         NgxsModule.forRoot([...ngxsStates]),
-        MatDatepickerModule
+        MatDatepickerModule,
+        ReactiveFormsModule
     ],
-  providers: [ FormService],
-  exports: [RouterModule,...components ],
-  bootstrap: [AppComponent]
+  providers: [ FormService ],
+  exports: [ RouterModule, ...components ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {
 }

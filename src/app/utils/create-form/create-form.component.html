@@ -1,14 +1,22 @@
 <div align='center'>
   <mat-card-title>{{ data.name }}</mat-card-title>
   <mat-divider></mat-divider>
-  <form>
+  <form [formGroup]="dynamicFormGroup">
     <section *ngFor="let field of form$ | async">
-      <app-input-field [classForm]="'outline'" [title]="field.name" [type]="field.type"></app-input-field>
+      <app-edit-field [isEditable]="true" [formInput]="true"
+                      [control]="$any(dynamicFormGroup).controls[field.name]"
+                      [title]="field.name"
+                      [classForm]="'outline'"
+                      [type]="field.type">
+      </app-edit-field>
     </section>
+
     <mat-divider></mat-divider>
-    <div mat-dialog-actions align="end">
-      <app-button [textButton]="'Valider'" (clickMethod)="submitMethod.bind(this)"></app-button>
-    </div>
+
+    <mat-dialog-actions align="end">
+      <app-button [textButton]="'Valider'" (clickMethod)="submit.bind(this)"
+                  [disabledButton]="dynamicFormGroup.invalid"></app-button>
+    </mat-dialog-actions>
   </form>
 </div>
 

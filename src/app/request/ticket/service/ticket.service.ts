@@ -2,12 +2,14 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Ticket} from "../../../utils/models/Ticket";
+import {httpUrl} from "../../../utils/constant";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class TicketService {
 
-  url = 'assets/';
-
+  url = httpUrl;
   constructor(private http: HttpClient) {
   }
 
@@ -21,14 +23,13 @@ export class TicketService {
     return this.http.delete(this.url + id);
   }
 
-  public createTicket(ticket: Ticket)
+  public createTicket(ticket: Ticket): Observable<Ticket>
   {
-    return this.http.post(this.url, ticket);
+    return this.http.post<Ticket>(this.url, ticket);
   }
 
-  public updateTicket(ticketId: number)
+  public updateTicket(ticketId: number, ticket: Partial<Ticket>): Observable<Ticket>
   {
-    // /warning : need to verify if is right
-    return this.http.put(this.url, ticketId);
+    return this.http.put<Ticket>(this.url + ticketId, ticket);
   }
 }

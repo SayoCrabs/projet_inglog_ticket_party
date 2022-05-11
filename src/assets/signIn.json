@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Nom",
+    "type": "String"
+  },
+  {
+    "name": "Prenom",
+    "type": "String"
+  },
+  {
+    "name": "Age",
+    "type": "Integer"
+  },
+  {
+    "name": "Adresse Mail",
+    "type": "String"
+  },
+  {
+    "name": "Mot de passe",
+    "type": "Password"
+  }
+]

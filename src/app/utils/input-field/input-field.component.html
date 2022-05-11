@@ -1,6 +1,4 @@
 <mat-form-field class="example-full-width" [appearance]="classForm">
   <mat-label>{{ title }}</mat-label>
-  <input matInput [type]="type" required/>
+  <input matInput [type]="type" [formControl]="control" required/>
 </mat-form-field>
-
-

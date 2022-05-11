@@ -1,3 +1,5 @@
+import {Ticket} from "../../../utils/models/Ticket";
+
 export const LOAD_ALL_TICKETS = '[Tickets] Load all tickets';
 export const UPDATE_TICKET = '[Tickets] Update ticket';
 export const DELETE_TICKET = '[Tickets] Delete ticket';
@@ -17,7 +19,7 @@ export class UpdateTicket
 {
   static readonly type = UPDATE_TICKET;
 
-  constructor()
+  constructor(public id: number, public changes: Partial<Ticket>)
   {
   }
 }
@@ -26,7 +28,7 @@ export class DeleteTicket
 {
   static readonly type = DELETE_TICKET;
 
-  constructor()
+  constructor(public ticketId: number)
   {
   }
 }
@@ -35,7 +37,7 @@ export class CreateTicket
 {
   static readonly type = CREATE_TICKET;
 
-  constructor()
+  constructor(public req: Ticket)
   {
   }
 }

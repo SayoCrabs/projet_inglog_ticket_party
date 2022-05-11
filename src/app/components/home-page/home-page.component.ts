@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {Select, Store} from "@ngxs/store";
 import {Ticket} from "../../utils/models/Ticket";
 import {TicketState} from "../../request/ticket/state/ticket.state";
-import {LoadAllTickets} from "../../request/ticket/action/ticket.action";
+import {DeleteTicket, LoadAllTickets, UpdateTicket} from "../../request/ticket/action/ticket.action";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateFormComponent} from "../../utils/create-form/create-form.component";
 
@@ -26,10 +26,9 @@ export class HomePageComponent implements OnInit {
     {
       localStorage.setItem('isProUserOrUser', 'visitor');
     }
-
   }
 
-  isProUser(): boolean | null
+  isProUser(): boolean
   {
     return localStorage.getItem('isProUserOrUser') === 'proUser';
   }
@@ -40,9 +39,9 @@ export class HomePageComponent implements OnInit {
    */
   newTicket() {
     const dialogRef = this.dialog.open(CreateFormComponent, {
-      width: '300px',
-      height: '500px',
-      data: {name: "Nouveau Ticket", formToLoad : 'form.json'},
+      width: '500px',
+      height: '100%',
+      data: {name: "Nouveau Ticket", formToLoad : 'form.json', type: 1},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -50,4 +49,21 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  deleteTicket(ticket: number) {
+    this.store.dispatch(new DeleteTicket(ticket));
+  }
+
+  updateNumberTicket(nb: string, ticketId: number)
+  {
+    this.store.dispatch(new UpdateTicket(ticketId, { nbTickets: Number(nb)}));
+  }
+
+  updatePriceTicket(nb: string, ticketId: number)
+  {
+    this.store.dispatch(new UpdateTicket(ticketId, { price: Number(nb)}));
+  }
+
+  updateAddress(address: string, ticketId: number) {
+    this.store.dispatch(new UpdateTicket(ticketId, { address: address}));
+  }
 }
