@@ -1,8 +1,11 @@
 package com.ticket.demo.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ticket.demo.model.Ticket;
-public interface TicketRepository extends CrudRepository<Ticket, Integer> {
+public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 
+	public List<Ticket> findByTitle(String title);
 }

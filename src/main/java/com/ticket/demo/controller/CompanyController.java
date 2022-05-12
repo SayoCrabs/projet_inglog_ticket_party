@@ -1,0 +1,47 @@
+package com.ticket.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ticket.demo.model.Company;
+import com.ticket.demo.services.CompanyService;
+
+@RestController
+public class CompanyController {
+	@Autowired
+	CompanyService companyService;
+	
+	@RequestMapping(value ="/companys", produces = "application/json")
+	 public List<Company> getCompanys() {
+		
+		return this.companyService.getCompanys();
+	 }
+		
+	@RequestMapping(value ="/companys",method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateCompany(@RequestBody Company company ){
+		
+			companyService.updateCompany(company);
+			return new ResponseEntity<>("Company is updated successsfully", HttpStatus.OK);
+	}
+	@RequestMapping(value = "/companys/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
+
+		companyService.deleteCompany(id);
+		return new ResponseEntity<>("Company is deleted successsfully", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/companys", method = RequestMethod.POST)
+	public ResponseEntity<Company> createCompany(@RequestBody Company company) {
+		companyService.createCompany(company);
+		return new ResponseEntity<Company>(HttpStatus.CREATED);
+	}
+	
+}

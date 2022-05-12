@@ -24,10 +24,10 @@ public class TicketController {
 		return this.ticketService.getTickets();
 	}
 
-	@RequestMapping(value = "/tickets/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateTicket(@PathVariable("id") String id, @RequestBody Ticket ticket) {
+	@RequestMapping(value = "/tickets", method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateTicket(@RequestBody Ticket ticket) {
 
-		ticketService.updateTicket(Integer.parseInt(id), ticket);
+		ticketService.updateTicket(ticket);
 		return new ResponseEntity<>("Ticket is updated successsfully", HttpStatus.OK);
 	}
 
@@ -36,6 +36,11 @@ public class TicketController {
 
 		ticketService.deleteTicket(Integer.parseInt(id));
 		return new ResponseEntity<>("Ticket is deleted successsfully", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/search/{ticket}", method = RequestMethod.GET, produces = "application/json")
+	public List<Ticket> search(@PathVariable String title) {
+		return ticketService.searchTicketByTitle(title);
 	}
 
 	@RequestMapping(value = "/tickets", method = RequestMethod.POST)

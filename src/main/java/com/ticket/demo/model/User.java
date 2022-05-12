@@ -1,14 +1,19 @@
 package com.ticket.demo.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.ticket.demo.enumerations.SexeEnum;
 
 @Entity
 @Table (name="T_USER")
@@ -17,31 +22,49 @@ public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
+	
+	private String name;
+	
+	private String firstname;
+	
+	private String email ;
+	
+	private String pasword;
+	
+	private Integer age;
+	
+	private Date dateOfbirth;
+	
+	private String address;
+	
+	@Enumerated(EnumType.STRING)
+	private SexeEnum sexe;
+	
+	@OneToMany(mappedBy = "client")
+	private Set<Invoice> invoices = new HashSet<>();
+	
+	@OneToMany(mappedBy = "user")
+	private Set<UserRole> roles = new HashSet<>();
+	
+	public SexeEnum getSexe() {
+		return sexe;
+	}
 
-	protected String name;
-	
-	protected String firstname;
-	
-	protected String email ;
-	
-	protected String pasword;
-	
-	protected int age;
-	
-	protected String role;
-	
-	@OneToMany (mappedBy="customer")
-	private List<Invoice> invoices = new ArrayList<>();
+	public void setSexe(SexeEnum sexe) {
+		this.sexe = sexe;
+	}
 
-	public User() {}
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
 
-	public User(String name, String firstname, String email, String pasword, int age) {
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
+	}
+
+	public User() 
+	{
 		
-		this.name = name;
-		this.firstname = firstname;
-		this.email = email;
-		this.pasword = pasword;
-		this.age = age;
 	}
 
 	public Integer getId() {
@@ -80,46 +103,51 @@ public class User {
 		this.pasword = pasword;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	
 
-	public String getRole() {
-		return role;
-	}
 
-	public void setRôle(String role) {
-		this.role = role;
-	}
-
-	public List<Invoice> getInvoices() {
-		return invoices;
-	}
-	
-	
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	
+	
+	public Date getDateOfbirth() {
+		return dateOfbirth;
 	}
 
-	public void setInvoices(List<Invoice> invoices) {
+	public void setDateOfbirth(Date dateOfbirth) {
+		this.dateOfbirth = dateOfbirth;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Set<Invoice> getInvoices() {
+		return invoices;
+	}
+
+	public void setInvoices(Set<Invoice> invoices) {
 		this.invoices = invoices;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", firstname=" + firstname + ", email=" + email + ", pasword="
-				+ pasword + ", age=" + age + ", rôle=" + role + "]";
-	}
+	
+
+	
+	
 
 	
 		

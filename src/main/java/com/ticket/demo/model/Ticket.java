@@ -3,9 +3,12 @@ package com.ticket.demo.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity 
@@ -15,10 +18,8 @@ public class Ticket {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-	private String title;
 	
-	private String entreprise; 
+	private String title;
 	
 	private Date startDate;
 	
@@ -26,26 +27,24 @@ public class Ticket {
 	
 	private String position; 
 	
-	private double price;
+	private Double price;
 	
-	private int quantite;
+	private Integer quantite;
+	
+	private Integer limitAge;
+
+	
+	
+	@ManyToOne
+	@JoinColumn(name="category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_ticket_category"))
+	private Category category;
 	
 	public Ticket() {
-		super();
 	
 	}
 
-	public Ticket(String title, String entreprise, Date startDate, Date endDate, String position, double price,
-			int quantite) {
-		
-		this.title = title;
-		this.entreprise = entreprise;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.position = position;
-		this.price = price;
-		this.quantite = quantite;
-		
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getId() {
@@ -58,14 +57,6 @@ public class Ticket {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getEntreprise() {
-		return entreprise;
-	}
-
-	public void setEntreprise(String entreprise) {
-		this.entreprise = entreprise;
 	}
 
 	public Date getStartDate() {
@@ -92,21 +83,44 @@ public class Ticket {
 		this.position = position;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public int getQuantite() {
+	public Integer getQuantite() {
 		return quantite;
 	}
 
-	public void setQuantite(int quantite) {
+	public void setQuantite(Integer quantite) {
 		this.quantite = quantite;
 	}
+
+	public Integer getLimitAge() {
+		return limitAge;
+	}
+
+	public void setLimitAge(Integer limiAge) {
+		this.limitAge = limiAge;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
+	
+
+	
+
+	
 
 		
 	

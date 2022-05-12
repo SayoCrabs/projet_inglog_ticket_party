@@ -22,10 +22,9 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public void updateTicket(Integer id, Ticket ticket) {
-		// TODO Auto-generated method stub
-		//Optional<Ticket> ticket = ticketRepository.findById(id);
-		//ticketRepository.save(null)
+	public void updateTicket(Ticket ticket) {
+		
+		ticketRepository.save(ticket);
 		
 	}
 
@@ -37,11 +36,19 @@ public class TicketServiceImpl implements TicketService {
 			ticketRepository.delete(ticket.get());
 		}
 	}
+	
 
 	@Override
 	public void createTicket(Ticket ticket) {
 		
 		ticketRepository.save(ticket);
 	}
+
+	@Override
+	public List<Ticket> searchTicketByTitle(String title) {
+		return ticketRepository.findByTitle(title);
+	}
+
+	
 
 }

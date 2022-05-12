@@ -8,10 +8,13 @@ public interface TicketService {
 
 	List<Ticket> getTickets();
 
-	void updateTicket(Integer id, Ticket ticket);
+	void updateTicket(Ticket ticket);
 
 	void deleteTicket(Integer id);
 
 	void createTicket(Ticket ticket);
+
+	List<Ticket> searchTicketByTitle(String title);
+	
 
 }

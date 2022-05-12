@@ -1,10 +1,10 @@
 package com.ticket.demo.model;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,41 +21,100 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 	
-	private Date invoiceDate;
+	private Integer numberInvoice;
 	
-	@ManyToOne 
-	@JoinColumn(name="customer_id", nullable=false)
-	private User customer;
+	private Date dateFacture;
 	
-	@OneToMany(mappedBy = "invoice")
-	private Set<InvoiceItem> items = new HashSet<>();
+	@ManyToOne //(cascade = CascadeType.ALL)
+	@JoinColumn(name= "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_invoice_user"))
+	private User client;
+	
+	@OneToMany (mappedBy = "invoice")
+	private Set<InvoiceItem> invoiceItems;
+	
+	public Set<InvoiceItem> getInvoiceItems() {
+		return invoiceItems;
+	}
+
+
+	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+		this.invoiceItems = invoiceItems;
+	}
+
 
 	public Invoice() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Invoice(Ticket ticket, Date invoiceDate) {
-		super();
-		this.invoiceDate = invoiceDate;
 	}
 
 
+	public Invoice(Integer numberInvoice, Date dateFacture) {
+		this.numberInvoice = numberInvoice;
+		this.dateFacture = dateFacture;
+	}
+	
+	
+	public Integer getNumberInvoice() {
+		return numberInvoice;
+	}
+
+
+	public void setNumberInvoice(Integer numberInvoice) {
+		this.numberInvoice = numberInvoice;
+	}
+
+
+	public Date getDateFacture() {
+		return dateFacture;
+	}
+
+	public void setDateFacture(Date dateFacture) {
+		this.dateFacture = dateFacture;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public User getClient() {
+		return client;
+	}
+
+
+	public void setClient(User client) {
+		this.client = client;
+	}
+
+
+
+	
+
+	
+	
+
+	
+
+
+
+
+
+	/*
 	public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append( "Facture de" ).append( this.customer )
                .append( " - " ).append( "\n" );
         return builder.toString();
     }
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
+	*/
+	
+	
+	
+	/*
 	public Date getInvoiceDate() {
 		return invoiceDate;
 	}
@@ -63,7 +122,8 @@ public class Invoice {
 	public void setInvoiceDate(Date invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
-
+	/*
+	/*
 	public User getCustomer() {
 		return customer;
 	}
@@ -78,7 +138,9 @@ public class Invoice {
 
 	public void setItems(Set<InvoiceItem> items) {
 		this.items = items;
-	}   
+	}  
+		*/
+ 
 	
 	
 	

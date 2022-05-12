@@ -29,7 +29,7 @@ public class UserController {
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateUser(@PathVariable("id") String id, @RequestBody User user) {
 
-		userService.updateUser(Integer.parseInt(id), user);
+		userService.updateUser(user);
 		return new ResponseEntity<>("User is updated successsfully", HttpStatus.OK);
 	}
 
