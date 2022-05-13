@@ -17,6 +17,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	
 	@Autowired
 	InvoiceRepository invoiceRepository;
+	
 	@Override
 	public List<Invoice> getInvoices() {
 		
@@ -39,6 +40,12 @@ public class InvoiceServiceImpl implements InvoiceService{
 	public void createInvoice(Invoice invoice) {
 		invoiceRepository.save(invoice);
 		
+	}
+	
+	@Override
+	public List<Invoice> findInvoicesByUserId(Integer userId) {
+		
+		return invoiceRepository.findByUserId(userId);
 	}
 	
 

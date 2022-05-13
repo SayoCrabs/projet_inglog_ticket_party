@@ -14,4 +14,6 @@ public interface InvoiceService {
 
 	void createInvoice(Invoice invoice);
 
+	List<Invoice> findInvoicesByUserId(Integer userId);
+
 }

@@ -22,11 +22,15 @@ public class InvoiceController {
 	
 	@RequestMapping(value ="/invoices" , produces = "application/json")
     public List<Invoice> getInvoices() {
-		
 		return this.invoiceService.getInvoices();
 	 }
 	
-	@RequestMapping(value ="/invoices",method = RequestMethod.PUT)
+	@RequestMapping(value ="/users/{userId}/invoices", method = RequestMethod.GET,  produces = "application/json")
+    public List<Invoice> findInvoicesByUserId(@PathVariable Integer userId) {
+		return this.invoiceService.findInvoicesByUserId(userId);
+	}
+	
+	@RequestMapping(value ="/invoices", method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateInvoice(@RequestBody Invoice invoice ){
 		
 		invoiceService.updateInvoice(invoice);
