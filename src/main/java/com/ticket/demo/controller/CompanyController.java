@@ -19,26 +19,26 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
-	@RequestMapping(value ="/companys", produces = "application/json")
+	@RequestMapping(value ="/companies", produces = "application/json")
 	 public List<Company> getCompanys() {
 		
 		return this.companyService.getCompanys();
 	 }
 		
-	@RequestMapping(value ="/companys",method = RequestMethod.PUT)
+	@RequestMapping(value ="/companies",method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateCompany(@RequestBody Company company ){
 		
 			companyService.updateCompany(company);
 			return new ResponseEntity<>("Company is updated successsfully", HttpStatus.OK);
 	}
-	@RequestMapping(value = "/companys/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/companies/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
 
 		companyService.deleteCompany(id);
 		return new ResponseEntity<>("Company is deleted successsfully", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/companys", method = RequestMethod.POST)
+	@RequestMapping(value = "/companies", method = RequestMethod.POST)
 	public ResponseEntity<Company> createCompany(@RequestBody Company company) {
 		companyService.createCompany(company);
 		return new ResponseEntity<Company>(HttpStatus.CREATED);
