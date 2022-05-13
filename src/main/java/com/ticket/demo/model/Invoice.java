@@ -3,7 +3,9 @@ package com.ticket.demo.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="T_INVOICE")
@@ -25,11 +32,13 @@ public class Invoice {
 	
 	private Date dateFacture;
 	
-	@ManyToOne //(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name= "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_invoice_user"))
 	private User client;
 	
-	@OneToMany (mappedBy = "invoice")
+	@JsonManagedReference("invoice-invoiceItems")
+	@OneToMany (cascade = CascadeType.ALL, mappedBy = "invoice", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.JOIN)
 	private Set<InvoiceItem> invoiceItems;
 	
 	public Set<InvoiceItem> getInvoiceItems() {

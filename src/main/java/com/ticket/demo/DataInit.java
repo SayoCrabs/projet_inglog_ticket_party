@@ -3,6 +3,8 @@ package com.ticket.demo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -50,6 +52,7 @@ public class DataInit implements CommandLineRunner {
 	
 	
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -108,14 +111,6 @@ public class DataInit implements CommandLineRunner {
 		userRole1.setCompany(company);
 		userRoleRepository.save(userRole1);
 		
-		Invoice facture = new Invoice();
-		facture.setNumberInvoice(111111);
-		facture.setDateFacture(today);
-		facture.setClient(user);
-		//facture.setClient(user1);
-		invoiceRepository.save(facture);
-
-		
 		Category category = new Category();
 		category.setDescription("Film");
 		categoryRepository.save(category);
@@ -128,15 +123,7 @@ public class DataInit implements CommandLineRunner {
 		category2.setDescription("Musique");
 		categoryRepository.save(category2);
 		
-		InvoiceItem listeFacture = new InvoiceItem();
-		listeFacture.setQuantity(60);
-		listeFacture.setInvoice(facture);
-		invoiceItemRepository.save(listeFacture);
-		
-		InvoiceItem listeFacture1 = new InvoiceItem();
-		listeFacture1.setQuantity(200);
-		listeFacture1.setInvoice(facture);
-		invoiceItemRepository.save(listeFacture1);
+	
 		
 		Ticket ticket = new Ticket();
 		ticket.setTitle("rombo");
@@ -146,6 +133,8 @@ public class DataInit implements CommandLineRunner {
 		ticket.setPrice(12.50);
 		ticket.setQuantite(30);
 		ticket.setLimitAge(20);
+		ticket.setCategory(category);
+		ticketRepository.save(ticket);
 		
 		Ticket ticket1 = new Ticket();
 		ticket1.setTitle("hip-hop");
@@ -155,17 +144,29 @@ public class DataInit implements CommandLineRunner {
 		ticket1.setPrice(20.00);
 		ticket1.setQuantite(40);
 		ticket1.setLimitAge(19);
-		
-		ticket.setCategory(category);
 		ticket1.setCategory(category);
-
-		
-		
-		ticketRepository.save(ticket);
 		ticketRepository.save(ticket1);
 		
 		
 		
+		Invoice facture = new Invoice();
+		facture.setNumberInvoice(111111);
+		facture.setDateFacture(today);
+		facture.setClient(user);
+		//facture.setClient(user1);
+		invoiceRepository.save(facture);
+		
+		InvoiceItem invoiceItem = new InvoiceItem();
+		invoiceItem.setQuantity(6);
+		invoiceItem.setTicket(ticket);
+		invoiceItem.setInvoice(facture);
+		invoiceItemRepository.save(invoiceItem);
+		
+		InvoiceItem invoiceItem1 = new InvoiceItem();
+		invoiceItem1.setQuantity(20);
+		invoiceItem1.setTicket(ticket1);
+		invoiceItem1.setInvoice(facture);
+		invoiceItemRepository.save(invoiceItem1);
 	}
 
 }

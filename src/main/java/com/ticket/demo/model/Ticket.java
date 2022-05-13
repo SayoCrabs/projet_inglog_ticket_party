@@ -2,6 +2,7 @@ package com.ticket.demo.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -32,10 +33,8 @@ public class Ticket {
 	private Integer quantite;
 	
 	private Integer limitAge;
-
 	
-	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_ticket_category"))
 	private Category category;
 	
@@ -114,21 +113,5 @@ public class Ticket {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
-	
-	
-
-	
-
-	
-
-		
-	
-	
-	
-	
-	
-	
-	
 
 }

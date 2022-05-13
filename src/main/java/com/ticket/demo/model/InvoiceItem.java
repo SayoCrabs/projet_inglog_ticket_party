@@ -1,6 +1,7 @@
 package com.ticket.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="T_invoice_Item")
@@ -19,9 +23,15 @@ public class InvoiceItem {
 	
 	private Integer quantity;
 	
+	@JsonBackReference("invoice-invoiceItems")
 	@ManyToOne //(cascade = CascadeType.ALL)
 	@JoinColumn(name="invoice_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_invoiceItem_invoice"))
 	private Invoice invoice;
+	
+	
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn(name="ticket_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_invoiceItem_ticket"))
+	private Ticket ticket;
 	
 
 	public Integer getQuantity() {
@@ -51,6 +61,16 @@ public class InvoiceItem {
 
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
+	}
+
+
+	public Ticket getTicket() {
+		return ticket;
+	}
+
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
 	}
 	
 	

@@ -3,12 +3,15 @@ package com.ticket.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ticket.demo.model.Company;
 import com.ticket.demo.repositories.CompanyRepository;
 
+@Transactional
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
