@@ -20,9 +20,9 @@ public class CompanyController {
 	CompanyService companyService;
 	
 	@RequestMapping(value ="/companies", produces = "application/json")
-	 public List<Company> getCompanys() {
+	 public List<Company> getCompanies() {
 		
-		return this.companyService.getCompanys();
+		return this.companyService.getCompanies();
 	 }
 		
 	@RequestMapping(value ="/companies",method = RequestMethod.PUT)

@@ -1,6 +1,7 @@
 package com.ticket.demo.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -39,7 +41,17 @@ public class Invoice {
 	@JsonManagedReference("invoice-invoiceItems")
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "invoice", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.JOIN)
-	private Set<InvoiceItem> invoiceItems;
+	private Set<InvoiceItem> invoiceItems = new HashSet<>();
+	
+	@JsonGetter("price")
+	public double getPrice() {
+		double price = 0;
+		
+		for (InvoiceItem invItem : invoiceItems) {
+			price += invItem.getPrice();
+		} 
+		return price;
+	}
 	
 	public Set<InvoiceItem> getInvoiceItems() {
 		return invoiceItems;

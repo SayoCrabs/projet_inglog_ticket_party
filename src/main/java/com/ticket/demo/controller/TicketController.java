@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ticket.demo.model.Ticket;
@@ -38,8 +39,8 @@ public class TicketController {
 		return new ResponseEntity<>("Ticket is deleted successsfully", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/search/{ticket}", method = RequestMethod.GET, produces = "application/json")
-	public List<Ticket> search(@PathVariable String title) {
+	@RequestMapping(value = "/ticketsByTitle", method = RequestMethod.POST, produces = "application/json")
+	public List<Ticket> search(@RequestParam String title) {
 		return ticketService.searchTicketByTitle(title);
 	}
 

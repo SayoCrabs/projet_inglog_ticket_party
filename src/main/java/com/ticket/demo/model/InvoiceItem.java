@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -32,6 +33,11 @@ public class InvoiceItem {
 	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn(name="ticket_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_invoiceItem_ticket"))
 	private Ticket ticket;
+	
+	@JsonGetter("price")
+	public double getPrice() {
+		return ticket.getPrice()* quantity;
+	}
 	
 
 	public Integer getQuantity() {

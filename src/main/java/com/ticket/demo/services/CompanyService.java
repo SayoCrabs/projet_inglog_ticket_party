@@ -6,7 +6,7 @@ import com.ticket.demo.model.Company;
 
 public interface CompanyService {
 
-	List<Company> getCompanys();
+	List<Company> getCompanies();
 
 	void updateCompany(Company company);
 
