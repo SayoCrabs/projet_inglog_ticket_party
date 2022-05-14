@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name="T_invoice_Item")
@@ -25,7 +24,7 @@ public class InvoiceItem {
 	private Integer quantity;
 	
 	@JsonBackReference("invoice-invoiceItems")
-	@ManyToOne //(cascade = CascadeType.ALL)
+	@ManyToOne 
 	@JoinColumn(name="invoice_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_invoiceItem_invoice"))
 	private Invoice invoice;
 	

@@ -13,7 +13,5 @@ public interface InvoiceRepository extends  JpaRepository<Invoice, Integer> {
 	@Query("SELECT DISTINCT inv FROM Invoice inv  JOIN FETCH inv.client JOIN FETCH inv.invoiceItems invItem JOIN FETCH invItem.ticket WHERE inv.client.id = :userId")
 	List<Invoice> findByUserId(Integer userId);
 
-	/* @Query("SELECT user FROM User user JOIN FETCH user.invoices WHERE user.id = :id")
-	public User findByIdAndFetchInvoicesEagerly(@Param("id") Integer id);
-	*/
+	
 }

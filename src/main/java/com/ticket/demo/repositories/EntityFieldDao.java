@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.ticket.demo.model.EntityField;
 
 @Component
-public class EntityFields {
+public class EntityFieldDao {
 
 	public List<EntityField> getEntityField(String entityName){
 		List<EntityField> entityField = new ArrayList<>();
