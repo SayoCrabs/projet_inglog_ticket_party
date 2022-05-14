@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +18,12 @@ import com.ticket.demo.model.Ticket;
 import com.ticket.demo.services.TicketService;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class TicketController {
 	@Autowired
 	TicketService ticketService;
-
+	
+	@GetMapping("/{id}/tickets")
 	@RequestMapping(value = "/tickets", produces = "application/json")
 	public List<Ticket> getTickets() {
 		return this.ticketService.getTickets();
