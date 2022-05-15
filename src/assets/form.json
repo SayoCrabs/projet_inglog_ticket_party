@@ -1,22 +1,22 @@
 [
   {
-    "name": "id",
+    "name": "ticketId",
     "type": "Integer"
   },
   {
-    "name": "titre",
+    "name": "title",
     "type": "String"
   },
   {
-    "name": "entreprise",
-    "type": "String"
+    "name": "price",
+    "type": "Integer"
   },
   {
     "name": "date de commencement",
     "type": "Date"
   },
   {
-    "name": "nb de ticket",
+    "name": "nbTickets",
     "type": "Integer"
   }
 ]

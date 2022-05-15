@@ -14,7 +14,7 @@
     <mat-divider></mat-divider>
 
     <mat-dialog-actions align="end">
-      <app-button [textButton]="'Valider'" (clickMethod)="submit.bind(this)"
+      <app-button [textButton]="'Valider'" (clickMethod)="submit()"
                   [disabledButton]="dynamicFormGroup.invalid"></app-button>
     </mat-dialog-actions>
   </form>

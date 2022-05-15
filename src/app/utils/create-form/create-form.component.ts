@@ -6,6 +6,10 @@ import {LoadFormFields} from "../../request/form/action/form.action";
 import {Field} from "../models/field";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Ticket} from "../models/Ticket";
+import {CreateTicket} from "../../request/ticket/action/ticket.action";
+import {User} from "../models/user";
+import {CreateUser} from "../../request/connection/action/connection.action";
 
 export interface DialogData {
   name: string;
@@ -52,12 +56,19 @@ export class CreateFormComponent implements OnInit {
   {
     console.log("create ticket");
     // call the action for create ticket
+    let ticketRequest = new Ticket(this.dynamicFormGroup.getRawValue());
+    this.store.dispatch(new CreateTicket(ticketRequest));
+    console.log(ticketRequest);
+
   }
 
   createNewUser()
   {
     console.log("create user");
     // call the action for create user
+    let userRequest = new User(this.dynamicFormGroup.getRawValue());
+    this.store.dispatch(new CreateUser(userRequest));
+    // a terme il faudrait qu'on ai un moyen de savoir si on doit creer un user simple ou un pro
   }
 
 
