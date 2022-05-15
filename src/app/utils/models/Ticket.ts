@@ -1,16 +1,33 @@
 export class Ticket
 {
-  public ticketId: number = 0;
+  public id: number = 0;
+
   public title: string | undefined;
+
+  public entreprise: string | undefined;
+
   public price: number | undefined;
-  public nbTickets: number = 0;
+
+  public quantite: number = 0;
+
   public address: string | undefined;
 
+  public startDate : Date | undefined;
+
+  public endDate: Date | undefined;
+
+  public position: string | undefined;
+
+
   constructor(newTicket: Ticket){
-    this.ticketId = newTicket.ticketId;
+    this.id = newTicket.id;
     this.title = newTicket.title;
+    this.entreprise = newTicket.entreprise;
     this.price = newTicket.price;
-    this.nbTickets = newTicket.nbTickets;
+    this.quantite = newTicket.quantite;
+    this.startDate = newTicket.startDate;
+    this.endDate = newTicket.endDate;
+    this.address = newTicket.address;
     this.address = newTicket.address;
   }
 }

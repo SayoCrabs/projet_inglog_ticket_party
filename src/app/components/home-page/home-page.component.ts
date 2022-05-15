@@ -55,7 +55,7 @@ export class HomePageComponent implements OnInit {
 
   updateNumberTicket(nb: string, ticketId: number)
   {
-    this.store.dispatch(new UpdateTicket(ticketId, { nbTickets: Number(nb)}));
+    this.store.dispatch(new UpdateTicket(ticketId, { quantite: Number(nb)}));
   }
 
   updatePriceTicket(nb: string, ticketId: number)

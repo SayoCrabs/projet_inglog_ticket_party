@@ -14,24 +14,24 @@
                       [title]="'Prix :'"
                       [value]="ticket.price"
                       [isEditable]="isProUser()"
-                      (contentWhileEditingChange)="updatePriceTicket($event, ticket.ticketId)"></app-edit-field>
+                      (contentWhileEditingChange)="updatePriceTicket($event, ticket.id)"></app-edit-field>
 
       <app-edit-field #nbTickets
                       [title]="'Adresse :'"
                       [value]="ticket.address"
                       [isEditable]="isProUser()"
-                      (contentWhileEditingChange)="updateNumberTicket($event, ticket.ticketId)"></app-edit-field>
+                      (contentWhileEditingChange)="updateNumberTicket($event, ticket.id)"></app-edit-field>
 
       <app-edit-field #address
                       [title]="'Adresse :'"
                       [value]="ticket.address"
                       [isEditable]="isProUser()"
-                      (contentWhileEditingChange)="updateAddress($event, ticket.ticketId)"></app-edit-field>
+                      (contentWhileEditingChange)="updateAddress($event, ticket.id)"></app-edit-field>
 
     </mat-card-content>
 
     <div *ngIf="isProUser()" class="d-flex justify-content-end my-4">
-      <button class="btn-flat" (click)="deleteTicket(ticket.ticketId)">
+      <button class="btn-flat" (click)="deleteTicket(ticket.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
