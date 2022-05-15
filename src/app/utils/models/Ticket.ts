@@ -22,7 +22,7 @@ export class Ticket
 
   public limitAge: number = 1;
 
-  private category: Category;
+  public category: Category;
 
   constructor(newTicket: Ticket) {
     this.id = newTicket.id;

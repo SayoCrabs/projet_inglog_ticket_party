@@ -9,7 +9,7 @@ import {httpUrl} from "../../../utils/constant";
 })
 export class TicketService {
 
-  url = httpUrl;
+  url = httpUrl + 'tickets';
   constructor(private http: HttpClient) {
   }
 
@@ -20,7 +20,7 @@ export class TicketService {
 
   public deleteTicket(id: number)
   {
-    return this.http.delete(this.url + id);
+    return this.http.delete(this.url + '/' + id);
   }
 
   public createTicket(ticket: Ticket): Observable<Ticket>

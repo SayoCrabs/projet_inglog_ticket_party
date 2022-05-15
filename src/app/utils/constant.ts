@@ -1,2 +1,2 @@
-export const httpUrl = 'assets/';
+export const httpUrl = 'http://localhost:8080/';
 

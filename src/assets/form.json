@@ -1,6 +1,6 @@
 [
   {
-    "name": "ticketId",
+    "name": "nb",
     "type": "Integer"
   },
   {
