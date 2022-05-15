@@ -1,3 +1,5 @@
+import {Category} from "./Category";
+
 export class Ticket
 {
   public id: number = 0;
@@ -18,16 +20,20 @@ export class Ticket
 
   public position: string | undefined;
 
+  public limitAge: number = 1;
 
-  constructor(newTicket: Ticket){
+  private category: Category;
+
+  constructor(newTicket: Ticket) {
     this.id = newTicket.id;
     this.title = newTicket.title;
     this.entreprise = newTicket.entreprise;
     this.price = newTicket.price;
     this.quantite = newTicket.quantite;
+    this.address = newTicket.address;
     this.startDate = newTicket.startDate;
     this.endDate = newTicket.endDate;
-    this.address = newTicket.address;
-    this.address = newTicket.address;
+    this.limitAge = newTicket.limitAge;
+    this.category = newTicket.category;
   }
 }

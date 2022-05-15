@@ -1,3 +1,8 @@
+import {Compagny} from "./Compagny";
+import {SexeEnum} from "./SexeEnum";
+import {Invoice} from "./Invoice";
+import {UserRole} from "./UserRole";
+
 export class User
 {
   id: number | undefined;
@@ -14,6 +19,16 @@ export class User
 
   dateOfBirth: Date | undefined;
 
+  address: string | undefined;
+
+  compagny: Compagny | undefined;
+
+  sexe: SexeEnum | undefined;
+
+  invoice: Invoice[] | undefined;
+
+  role: UserRole | undefined;
+
   constructor(user: User) {
     this.name = user.name;
     this.firstname = user.firstname;
@@ -21,5 +36,8 @@ export class User
     this.password = user.password;
     this.age = user.age;
     this.dateOfBirth = user.dateOfBirth;
+    this.address = user.address;
+    this.compagny = user.compagny;
+    this.sexe = user.sexe;
   }
 }

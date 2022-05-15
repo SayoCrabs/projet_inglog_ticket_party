@@ -1,0 +1,5 @@
+enum RoleEnum
+{
+  User,
+  ProUser
+}
