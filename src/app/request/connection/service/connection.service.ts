@@ -7,21 +7,20 @@ import {User} from "../../../utils/models/user";
 @Injectable({ providedIn: 'root' })
 export class ConnectionService {
 
-  url = httpUrl;
+  url = httpUrl + 'User';
   constructor(private http: HttpClient ) {
   }
 
-  public getUserIfExist(name: string, password: string): Observable<boolean>
+  public getUserByEmailAndPassword(name: string, password: string): Observable<User>
   {
-    return this.http.get<boolean>(this.url + name + password);
+    return this.http.get<User>(this.url + name + password);
   }
 
-  public loadUser(userId: string): Observable<User>
+  public loadUsers(): Observable<User[]>
   {
-    return this.http.get<User>(this.url + userId);
+    return this.http.get<User[]>(this.url);
   }
 
-  //not needed but can be used on the future
   public deleteUser(id: string)
   {
     return this.http.delete(this.url + id);

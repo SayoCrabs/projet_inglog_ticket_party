@@ -19,7 +19,7 @@ export class UpdateTicket
 {
   static readonly type = UPDATE_TICKET;
 
-  constructor(public id: number, public changes: Ticket)
+  constructor(public id: string, public changes: Ticket)
   {
   }
 }
@@ -28,7 +28,7 @@ export class DeleteTicket
 {
   static readonly type = DELETE_TICKET;
 
-  constructor(public ticketId: number)
+  constructor(public ticketId: string, public ticket: Ticket)
   {
   }
 }

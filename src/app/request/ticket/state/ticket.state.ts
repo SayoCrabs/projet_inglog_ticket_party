@@ -92,13 +92,33 @@ export class TicketState extends GenericState
   @Action(DeleteTicket)
   DeleteTicket(ctx: StateContext<TicketStateModel>, action: DeleteTicket)
   {
-    return this.createTicketService.deleteTicket(action.ticketId);
+    return this.createTicketService.deleteTicket(action.ticketId).pipe(
+      map(_ => this.DeleteTicketSuccess(ctx, action.ticket))
+    );
+  }
+
+  DeleteTicketSuccess(ctx: StateContext<TicketStateModel>, ticket: Ticket)
+  {
+    ctx.patchState({
+      tickets: TicketState.tickets(ctx.getState()).filter(t => t !== ticket),
+      ...GenericState.success()
+    });
+    console.log(ctx.getState().tickets);
   }
 
   @Action(UpdateTicket)
   UpdateTicket(ctx: StateContext<TicketStateModel>, action: UpdateTicket)
   {
-    return this.createTicketService.updateTicket(action.id, action.changes);
+    return this.createTicketService.updateTicket(action.id, action.changes).pipe(
+      map((ticket) => this.UpdateTicketSuccess(ctx, ticket))
+    );
+  }
+
+  UpdateTicketSuccess(ctx: StateContext<TicketStateModel>, ticket: Ticket)
+  {
+    return ctx.patchState({
+      tickets:  [ ticket, ...ctx.getState().tickets.filter(t => t.id !== ticket.id) ]
+    })
   }
 
 }

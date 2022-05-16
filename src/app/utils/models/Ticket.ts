@@ -2,7 +2,7 @@ import {Category} from "./Category";
 
 export class Ticket
 {
-  public id: number = 0;
+  public id: string = '';
 
   public title: string = '';
 
@@ -10,9 +10,9 @@ export class Ticket
 
   public quantite: number = 0;
 
-  public startDate : Date | undefined;
+  public startDate : Date;
 
-  public endDate: Date | undefined;
+  public endDate: Date;
 
   public position: string | undefined;
 
@@ -20,7 +20,8 @@ export class Ticket
 
   public category: Category;
 
-  constructor(newTicket: Ticket, desc: string) {
+  constructor(newTicket: Ticket, desc: string = '') {
+    console.log(newTicket);
     this.id = newTicket.id;
     this.title = newTicket.title;
     this.price = newTicket.price;
@@ -30,5 +31,11 @@ export class Ticket
     this.position = newTicket.position;
     this.limitAge = newTicket.limitAge;
     this.category = new Category(desc);
+  }
+
+  modify(ticket:Ticket, value: string)
+  {
+    ticket.quantite = Number(value);
+    return ticket;
   }
 }

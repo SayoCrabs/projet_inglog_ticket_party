@@ -2,40 +2,54 @@
   <app-button (clickMethod)="newTicket()" [colorBtn]="'yellow'" class="addTicket" [textButton]="'Ajouter un ticket'"></app-button>
 </ng-container>
 
-<ng-container *ngIf="(tickets$ | async) as ticket">
-  <mat-card *ngFor="let ticket of (tickets$ |async)">
+<ng-container *ngIf="(tickets$ | async) as ticket" >
+  <mat-card *ngFor="let ticket of (tickets$ |async)" class="m-5">
 
     <mat-card-header>
       <app-edit-field [title]="'Nom :'" [value]="test(ticket)"></app-edit-field>
     </mat-card-header>
 
     <mat-card-content>
-      <app-edit-field #price
-                      [title]="'Prix :'"
+      <app-edit-field [title]="'Date de début : '"
+                      [type]="'Date'"
+                      [value]="getDate(ticket.startDate)"
+                      [isEditable]="isProUser()"
+                      (contentWhileEditingChange)="updateStartDate(ticket, $event)"></app-edit-field>
+
+      <app-edit-field [title]="'Date de fin : '"
+                      [type]="'Date'"
+                      [value]="getDate(ticket.endDate)"
+                      [isEditable]="isProUser()"
+                      (contentWhileEditingChange)="updateEndDate(ticket, $event)"></app-edit-field>
+
+      <app-edit-field [title]="'Prix :'"
                       [value]="ticket.price"
                       [isEditable]="isProUser()"
                       (contentWhileEditingChange)="updatePriceTicket(ticket, $event)"></app-edit-field>
 
-      <app-edit-field #nbTickets
-                      [title]="'Nombre de ticket en vente :'"
+      <app-edit-field [title]="'Nombre de ticket en vente :'"
                       [value]="ticket.quantite"
                       [isEditable]="isProUser()"
                       (contentWhileEditingChange)="updateNumberTicket(ticket, $event)"></app-edit-field>
 
-      <app-edit-field #address
-                      [title]="'Ville :'"
+      <app-edit-field [title]="'Ville :'"
                       [value]="ticket.position"
                       [isEditable]="isProUser()"
                       (contentWhileEditingChange)="updatePosition(ticket, $event)"></app-edit-field>
 
+      <app-edit-field [title]="'Limit d age :'"
+                      [value]="ticket.limitAge"
+                      [isEditable]="isProUser()"
+                      (contentWhileEditingChange)="updateLimitAge(ticket, $event)"></app-edit-field>
+
     </mat-card-content>
 
     <div *ngIf="isProUser()" class="d-flex justify-content-end my-4">
-      <button class="btn-flat" (click)="deleteTicket(ticket.id)">
+      <button class="btn-flat" (click)="deleteTicket(ticket.id, ticket)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
-
   </mat-card>
+
 </ng-container>
 

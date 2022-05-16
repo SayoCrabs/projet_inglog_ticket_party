@@ -8,15 +8,15 @@ import {User} from "../../../utils/models/user";
 
 export interface ConnectionStateModel extends GenericStateModel
 {
-  user: User,
-  exist: boolean,
+  user: User | null,
+  users: User[],
   creating: boolean,
   created: boolean
 }
 
 export const connectionInitialState = {
   user: null,
-  exist: false,
+  users: [],
   creating: false,
   created: false,
   ...GenericState.init()
@@ -40,19 +40,25 @@ export class ConnectionState extends GenericState
     return state.user;
   }
 
+  @Selector()
+  static users(state: ConnectionStateModel): User[] | null
+  {
+    return state.users;
+  }
+
   // region Get
 
   @Action(CheckUser)
-  isUserExist(ctx: StateContext<ConnectionStateModel>, action: CheckUser)
+  GetUserByEmailAndPassword(ctx: StateContext<ConnectionStateModel>, action: CheckUser)
   {
-    return this.connectionService.getUserIfExist(action.userName, action.password).pipe(
-      map((exist: boolean) => this.userExistSuccess(ctx, exist)));
+    return this.connectionService.getUserByEmailAndPassword(action.userName, action.password).pipe(
+      map((user: User) => this.GetUserByEmailAndPasswordSuccess(ctx, user)));
   }
 
-  userExistSuccess(ctx: StateContext<ConnectionStateModel>, exist: boolean)
+  GetUserByEmailAndPasswordSuccess(ctx: StateContext<ConnectionStateModel>, user: User)
   {
     return ctx.patchState({
-      exist: exist,
+      user: user,
       ...GenericState.success()
     });
   }
@@ -60,14 +66,14 @@ export class ConnectionState extends GenericState
   @Action(LoadUser)
   LoadUser(ctx: StateContext<ConnectionStateModel>, action: LoadUser)
   {
-    return this.connectionService.loadUser(action.id).pipe(
-      map((user: User) => this.LoadUserSuccess(ctx, user)));
+    return this.connectionService.loadUsers().pipe(
+      map((users: User[]) => this.LoadUserSuccess(ctx, users)));
   }
 
-  LoadUserSuccess(ctx: StateContext<ConnectionStateModel>, user: User)
+  LoadUserSuccess(ctx: StateContext<ConnectionStateModel>, users: User[])
   {
     return ctx.patchState({
-      user: user,
+      users: users,
       ...GenericState.success()
     });
   }
@@ -124,8 +130,8 @@ export class ConnectionState extends GenericState
   }
 
   @Action(ResetUser)
-  ResetUser(ctx: StateContext<ConnectionStateModel>, action: ResetUser)
+  ResetUser(ctx: StateContext<ConnectionStateModel>)
   {
-    // a voir avec boulot
+    return ctx.setState(connectionInitialState);
   }
 }

@@ -5,7 +5,6 @@ import {catchError, map, of} from "rxjs";
 import {InvoiceService} from "../service/invoice.service";
 import {Invoice} from "../../../utils/models/Invoice";
 import {CreateInvoice, DeleteInvoice, LoadAllInvoices, UnloadInvoice, UpdateInvoice} from "../action/invoice.action";
-import {ConnectionStateModel} from "../../connection/state/connection.state";
 
 export interface InvoiceStateModel extends GenericStateModel
 {
@@ -43,7 +42,7 @@ export class InvoiceState extends GenericState
   }
 
   @Action(LoadAllInvoices)
-  LoadAllTickets(ctx: StateContext<InvoiceStateModel>, action: LoadAllInvoices)
+  LoadAllTickets(ctx: StateContext<InvoiceStateModel>)
   {
     return this.invoiceService.loadInvoices().pipe(
       map((invoice: Invoice[]) => this.LoadInvoiceSuccess(ctx, invoice)));
@@ -104,8 +103,8 @@ export class InvoiceState extends GenericState
   }
 
   @Action(UnloadInvoice)
-  UnloadInvoice(ctx: StateContext<InvoiceStateModel>, action: UnloadInvoice)
+  UnloadInvoice(ctx: StateContext<InvoiceStateModel>)
   {
-    // a voir avec boulot
+    return ctx.setState(invoiceInitialState);
   }
 }
