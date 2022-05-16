@@ -25,13 +25,13 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public void updateTicket(String id, Ticket ticket) {
-		
+	public Ticket updateTicket(String id, Ticket ticket) {
+	
 		Optional<Ticket> upTicket = ticketRepository.findById(Integer.parseInt(id));
 		if (upTicket.isPresent()) {
-			ticketRepository.save(ticket);
+			return ticketRepository.save(ticket);
 		}
-		
+		return null;
 		
 	}
 
