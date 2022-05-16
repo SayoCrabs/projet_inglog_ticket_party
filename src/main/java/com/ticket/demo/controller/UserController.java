@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ticket.demo.model.Ticket;
+import com.ticket.demo.model.Ticket;  
 import com.ticket.demo.model.User;
 import com.ticket.demo.services.UserService;
 
@@ -53,4 +54,9 @@ public class UserController {
 		
 	}
 
+	
+	@RequestMapping(value = "/users/authenticate", method = RequestMethod.GET, produces = "application/json")
+	public User getAuthenticateUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+		return userService.getAuthenticateUser( email, password);
+	}
 }

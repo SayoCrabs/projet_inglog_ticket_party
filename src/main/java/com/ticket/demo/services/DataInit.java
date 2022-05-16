@@ -1,4 +1,4 @@
-package com.ticket.demo;
+package com.ticket.demo.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class DataInit implements CommandLineRunner {
 	TicketRepository ticketRepository;
 	
 	@Autowired
-	UserRepository userRepository;
+	UserService userService;
 	
 	@Autowired
 	InvoiceRepository invoiceRepository;
@@ -81,12 +81,12 @@ public class DataInit implements CommandLineRunner {
 		user.setAge(25);
 		user.setFirstname("rodney");
 		user.setName("Damien");
-		user.setPasword("12345");
+		user.setPassword("12345");
 		user.setDateOfbirth(today);
 		user.setSexe(SexeEnum.Male);
 		user.getRoles().add(new UserRole(RoleEnum.User, marchand1, user));
 		user.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2, user));
-		userRepository.save(user);
+		userService.createUser(user);
 		
 		User user1 = new User();
 		user1.setEmail("b@gmail.com");
@@ -94,12 +94,25 @@ public class DataInit implements CommandLineRunner {
 		user1.setAge(30);
 		user1.setFirstname("arnald");
 		user1.setName("Robert");
-		user1.setPasword("2489");
+		user1.setPassword("2489");
 		user1.setDateOfbirth(today);
 		user1.setSexe(SexeEnum.Male);
 		user1.getRoles().add(new UserRole(RoleEnum.User, marchand1, user1));
 		//user1.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2, user1));
-		userRepository.save(user1);
+		userService.createUser(user1);
+		
+		User user2 = new User();
+		user2.setEmail("c@gmail.com");
+		user2.setAddress("49 route tranquille");
+		user2.setAge(30);
+		user2.setFirstname("proUser");
+		user2.setName("proUser");
+		user2.setPassword("12345");
+		user2.setDateOfbirth(today);
+		user2.setSexe(SexeEnum.Male);
+		//user2.getRoles().add(new UserRole(RoleEnum.User, marchand1, user2));
+		user2.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2, user2));
+		userService.createUser(user2);
 		
 		/*UserRole userRole = new UserRole();
 		userRole.setRole(RoleEnum.User);
