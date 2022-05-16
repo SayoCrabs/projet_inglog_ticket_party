@@ -35,24 +35,22 @@ public class UserController {
 		return userService.findById(id).orElse(null);
 	}
 
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT, produces = "application/json")
+	public User updateUser(@PathVariable("id") String id, @RequestBody User user) {
 
-		userService.updateUser(user);
-		return new ResponseEntity<>("User is updated successsfully", HttpStatus.OK);
+		return userService.updateUser(user);
 	}
 
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE, produces = "application/json")
-	public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+	public void delete(@PathVariable("id") String id) {
 
 		userService.deleteUser(Integer.parseInt(id));
-		return new ResponseEntity<>("User is deleted successsfully", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<User> createUser(@RequestBody User user) {
-		userService.createUser(user);
-		return new ResponseEntity<User>(HttpStatus.CREATED);
+	public User createUser(@RequestBody User user) {
+		return userService.createUser(user);
+		
 	}
 
 }

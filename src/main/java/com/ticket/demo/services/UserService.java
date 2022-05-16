@@ -7,11 +7,11 @@ import com.ticket.demo.model.User;
 
 public interface UserService {
 
-	void updateUser(User user);
+	User updateUser(User user);
 
 	void deleteUser(int id);
 
-	void createUser(User user);
+	User createUser(User user);
 
 	List<User> getUsers();
 
