@@ -22,3 +22,8 @@ body
   background-color: #ffd740;
   color: black;
 }
+
+.red {
+  background-color: darkred;
+  color: white;
+}

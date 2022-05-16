@@ -30,6 +30,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { TextFieldComponent } from './utils/text-field/text-field.component';
 import { EditFieldComponent } from './utils/edit-field/edit-field.component';
 import {TicketService} from "./request/ticket/service/ticket.service";
+import { UserAccountComponent } from './components/user-account/user-account.component';
 
 const material = [ MatCardModule,
   MatDialogModule,
@@ -53,7 +54,8 @@ const components = [AppComponent,
     ...components,
     ButtonComponent,
     TextFieldComponent,
-    EditFieldComponent
+    EditFieldComponent,
+    UserAccountComponent
   ],
     imports: [
         BrowserModule,

@@ -4,7 +4,8 @@ import {GenericState, GenericStateModel} from "../../../utils/models/GenericStat
 import {catchError, map, of} from "rxjs";
 import {InvoiceService} from "../service/invoice.service";
 import {Invoice} from "../../../utils/models/Invoice";
-import {CreateInvoice, DeleteInvoice, LoadAllInvoices, UpdateInvoice} from "../action/invoice.action";
+import {CreateInvoice, DeleteInvoice, LoadAllInvoices, UnloadInvoice, UpdateInvoice} from "../action/invoice.action";
+import {ConnectionStateModel} from "../../connection/state/connection.state";
 
 export interface InvoiceStateModel extends GenericStateModel
 {
@@ -102,4 +103,9 @@ export class InvoiceState extends GenericState
     return this.invoiceService.updateInvoice(action.id, action.changes);
   }
 
+  @Action(UnloadInvoice)
+  UnloadInvoice(ctx: StateContext<InvoiceStateModel>, action: UnloadInvoice)
+  {
+    // a voir avec boulot
+  }
 }

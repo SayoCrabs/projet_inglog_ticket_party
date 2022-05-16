@@ -4,7 +4,7 @@ export const LOAD_ALL_INVOICES = '[Invoices] Load all invoices';
 export const UPDATE_INVOICE = '[Invoice] Update invoice';
 export const DELETE_INVOICE = '[Invoice] Delete invoice';
 export const CREATE_INVOICE = '[Invoice] Create invoice';
-
+export const UNLOAD_INVOICE = '[Invoice] Unload invoice';
 
 export class LoadAllInvoices
 {
@@ -38,6 +38,15 @@ export class CreateInvoice
   static readonly type = CREATE_INVOICE;
 
   constructor(public req: Invoice)
+  {
+  }
+}
+
+export class UnloadInvoice
+{
+  static readonly type = UNLOAD_INVOICE;
+
+  constructor()
   {
   }
 }

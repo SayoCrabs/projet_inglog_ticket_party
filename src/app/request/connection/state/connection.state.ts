@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {catchError, map, of} from "rxjs";
 import {GenericState, GenericStateModel} from "../../../utils/models/GenericState";
 import {ConnectionService} from "../service/connection.service";
-import {CheckUser, CreateUser, DeleteUser, LoadUser, UpdateUser} from "../action/connection.action";
+import {CheckUser, CreateUser, DeleteUser, LoadUser, ResetUser, UpdateUser} from "../action/connection.action";
 import {User} from "../../../utils/models/user";
 
 export interface ConnectionStateModel extends GenericStateModel
@@ -35,7 +35,7 @@ export class ConnectionState extends GenericState
   }
 
   @Selector()
-  static user(state: ConnectionStateModel): User
+  static user(state: ConnectionStateModel): User | null
   {
     return state.user;
   }
@@ -112,14 +112,20 @@ export class ConnectionState extends GenericState
   // END CREATE
 
   @Action(DeleteUser)
-  DeleteTicket(ctx: StateContext<ConnectionStateModel>, action: DeleteUser)
+  DeleteUser(ctx: StateContext<ConnectionStateModel>, action: DeleteUser)
   {
     return this.connectionService.deleteUser(action.userId);
   }
 
   @Action(UpdateUser)
-  UpdateTicket(ctx: StateContext<ConnectionStateModel>, action: UpdateUser)
+  UpdateUser(ctx: StateContext<ConnectionStateModel>, action: UpdateUser)
   {
     return this.connectionService.updateUser(action.id, action.changes);
+  }
+
+  @Action(ResetUser)
+  ResetUser(ctx: StateContext<ConnectionStateModel>, action: ResetUser)
+  {
+    // a voir avec boulot
   }
 }
