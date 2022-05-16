@@ -40,17 +40,16 @@ public class InvoiceController {
 		invoiceService.updateInvoice(invoice);
 			return new ResponseEntity<>("Invoice is updated successsfully", HttpStatus.OK);
 	}
-	@RequestMapping(value = "/invoices/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/invoices/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
 
 		invoiceService.deleteInvoice(id);
 		return new ResponseEntity<>("Invoice is deleted successsfully", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/invoices", method = RequestMethod.POST)
-	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
-		invoiceService.createInvoice(invoice);
-		return new ResponseEntity<Invoice>(HttpStatus.CREATED);
+	@RequestMapping(value = "/invoices", method = RequestMethod.POST, produces = "application/json")
+	public Invoice createInvoice(@RequestBody Invoice invoice) {
+		return invoiceService.createInvoice(invoice);
 	}
 	
 	@RequestMapping(value = "/invoices/{id}", method = RequestMethod.GET, produces = "application/json")

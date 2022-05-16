@@ -13,7 +13,7 @@ public interface InvoiceService {
 
 	void deleteInvoice(Integer id);
 
-	void createInvoice(Invoice invoice);
+	Invoice createInvoice(Invoice invoice);
 
 	List<Invoice> findInvoicesByUserId(Integer userId);
 

@@ -54,9 +54,8 @@ public class TicketController {
 	}
 
 	@RequestMapping(value = "/tickets", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
-		ticketService.createTicket(ticket);
-		return new ResponseEntity<Ticket>(HttpStatus.CREATED);
+	public Ticket createTicket(@RequestBody Ticket ticket) {
+		return ticketService.createTicket(ticket);
 	}
 
 }

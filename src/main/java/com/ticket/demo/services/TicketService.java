@@ -13,7 +13,7 @@ public interface TicketService {
 
 	void deleteTicket(Integer id);
 
-	void createTicket(Ticket ticket);
+	Ticket createTicket(Ticket ticket);
 
 	List<Ticket> searchTicketByTitle(String title);
 
