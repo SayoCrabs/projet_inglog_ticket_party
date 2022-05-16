@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ticket.demo.model.Category;
+import com.ticket.demo.model.Ticket;
 import com.ticket.demo.services.CategoryService;
 
 @Controller
@@ -23,31 +24,33 @@ public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
 	
-	@GetMapping("/{id}/categorys")
-	@RequestMapping(value ="/categorys" , produces = "application/json")
+	@RequestMapping(value ="/categories" , produces = "application/json")
     public List<Category> getCategorys() {
 		
 		return this.categoryService.getCategorys();
 	 }
 	
-	@RequestMapping(value ="/categorys",method = RequestMethod.PUT)
+	@RequestMapping(value ="/categories",method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateCategory(@RequestBody Category category ){
 		
 		categoryService.updateCategory(category);
 			return new ResponseEntity<>("Category is updated successsfully", HttpStatus.OK);
 	}
-	@RequestMapping(value = "/categorys/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
 
 		categoryService.deleteCategory(id);
 		return new ResponseEntity<>("Category is deleted successsfully", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/categorys", method = RequestMethod.POST)
+	@RequestMapping(value = "/categories", method = RequestMethod.POST)
 	public ResponseEntity<Category> createCategory(@RequestBody Category category) {
 		categoryService.createCategory(category);
 		return new ResponseEntity<Category>(HttpStatus.CREATED);
 	}
 	
-	
+	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET, produces = "application/json")
+	public Category getCategory(@PathVariable("id") Integer id) {
+		return categoryService.findById(id).orElse(null);
+	}
 }

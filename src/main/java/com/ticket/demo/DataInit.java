@@ -84,8 +84,8 @@ public class DataInit implements CommandLineRunner {
 		user.setPasword("12345");
 		user.setDateOfbirth(today);
 		user.setSexe(SexeEnum.Male);
-		user.getRoles().add(new UserRole(RoleEnum.User, marchand1));
-		user.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2));
+		user.getRoles().add(new UserRole(RoleEnum.User, marchand1, user));
+		user.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2, user));
 		userRepository.save(user);
 		
 		User user1 = new User();
@@ -97,11 +97,11 @@ public class DataInit implements CommandLineRunner {
 		user1.setPasword("2489");
 		user1.setDateOfbirth(today);
 		user1.setSexe(SexeEnum.Male);
-		user1.getRoles().add(new UserRole(RoleEnum.User, marchand1));
-		user1.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2));
+		user1.getRoles().add(new UserRole(RoleEnum.User, marchand1, user1));
+		//user1.getRoles().add(new UserRole(RoleEnum.ProUser, marchand2, user1));
 		userRepository.save(user1);
 		
-		UserRole userRole = new UserRole();
+		/*UserRole userRole = new UserRole();
 		userRole.setRole(RoleEnum.User);
 		userRole.setCompany(company);
 		userRoleRepository.save(userRole);
@@ -109,7 +109,7 @@ public class DataInit implements CommandLineRunner {
 		UserRole userRole1 = new UserRole();
 		userRole1.setRole(RoleEnum.User);
 		userRole1.setCompany(company);
-		userRoleRepository.save(userRole1);
+		userRoleRepository.save(userRole1);*/
 		
 		Category category = new Category();
 		category.setDescription("Film");

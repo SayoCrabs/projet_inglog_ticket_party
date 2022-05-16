@@ -44,6 +44,11 @@ public class CompanyServiceImpl implements CompanyService {
 		
 		companyRepository.save(company);
 	}
+
+	@Override
+	public Optional<Company> findById(Integer id) {
+		return companyRepository.findById(id);
+	}
 	
 	
 }

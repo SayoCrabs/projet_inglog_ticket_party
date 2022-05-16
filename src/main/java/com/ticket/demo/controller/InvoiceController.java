@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ticket.demo.model.Invoice;
+import com.ticket.demo.model.Ticket;
 import com.ticket.demo.services.InvoiceService;
 
 @RestController
@@ -23,7 +24,6 @@ public class InvoiceController {
 	@Autowired
 	InvoiceService invoiceService;
 	
-	@GetMapping("/{id}/invoices")
 	@RequestMapping(value ="/invoices" , produces = "application/json")
     public List<Invoice> getInvoices() {
 		return this.invoiceService.getInvoices();
@@ -53,5 +53,8 @@ public class InvoiceController {
 		return new ResponseEntity<Invoice>(HttpStatus.CREATED);
 	}
 	
-	
+	@RequestMapping(value = "/invoices/{id}", method = RequestMethod.GET, produces = "application/json")
+	public Invoice getInvoice(@PathVariable("id") Integer id) {
+		return invoiceService.findById(id).orElse(null);
+	}
 }

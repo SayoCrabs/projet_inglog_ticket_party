@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,9 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ticket.demo.enumerations.SexeEnum;
-
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+ 
 @Entity
 @Table (name="T_USER")
 public class User {
@@ -45,7 +47,8 @@ public class User {
 	@OneToMany(mappedBy = "client")
 	private Set<Invoice> invoices = new HashSet<>();
 	
-	@OneToMany(mappedBy = "user")
+	@JsonManagedReference("user-roles")
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
 	private Set<UserRole> roles = new HashSet<>();
 	
 	public SexeEnum getSexe() {
@@ -146,13 +149,11 @@ public class User {
 		this.invoices = invoices;
 	}
 
-	
-
-	
-	
-
-	
+	/*public void addRoles(UserRole... userRole) {
+		for (int i = 0; i < userRole.length; i++) {
+			this.roles.add(userRole[i]);
+			userRole[i].setUser(this);
+		}
 		
-	
-
+	}*/
 }
