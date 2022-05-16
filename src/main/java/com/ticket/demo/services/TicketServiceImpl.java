@@ -56,6 +56,12 @@ public class TicketServiceImpl implements TicketService {
 		return ticketRepository.findByTitle(title);
 	}
 
+
+	@Override
+	public Optional<Ticket> findById(Integer id) {
+		return ticketRepository.findById(id);
+	}
+
 	
 
 }

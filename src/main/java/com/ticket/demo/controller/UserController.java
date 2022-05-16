@@ -1,6 +1,7 @@
 package com.ticket.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ticket.demo.model.Ticket;
 import com.ticket.demo.model.User;
 import com.ticket.demo.services.UserService;
 
@@ -26,6 +28,11 @@ public class UserController {
 	@RequestMapping(value = "/users", produces = "application/json")
 	public List<User> getUsers() {
 		return this.userService.getUsers();
+	}
+	
+	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET, produces = "application/json")
+	public User getUser(@PathVariable("id") Integer id) {
+		return userService.findById(id).orElse(null);
 	}
 
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)

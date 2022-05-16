@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ticket.demo.model.Company;
+import com.ticket.demo.model.Ticket;
 import com.ticket.demo.services.CompanyService;
 
 @RestController
@@ -22,12 +23,16 @@ public class CompanyController {
 	@Autowired
 	CompanyService companyService;
 	
-	@GetMapping("/{id}/companies")
 	@RequestMapping(value ="/companies", produces = "application/json")
 	 public List<Company> getCompanies() {
 		
 		return this.companyService.getCompanies();
 	 }
+	
+	@RequestMapping(value = "/companies/{id}", method = RequestMethod.GET, produces = "application/json")
+	public Company getCompany(@PathVariable("id") Integer id) {
+		return companyService.findById(id).orElse(null);
+	}
 		
 	@RequestMapping(value ="/companies",method = RequestMethod.PUT)
 	public ResponseEntity<Object> updateCompany(@RequestBody Company company ){

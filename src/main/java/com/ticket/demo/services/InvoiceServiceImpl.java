@@ -47,6 +47,10 @@ public class InvoiceServiceImpl implements InvoiceService{
 		
 		return invoiceRepository.findByUserId(userId);
 	}
+	@Override
+	public Optional<Invoice> findById(Integer id) {
+		return invoiceRepository.findById(id);
+	}
 	
 
 }

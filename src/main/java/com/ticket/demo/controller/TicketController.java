@@ -1,12 +1,12 @@
 package com.ticket.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +23,14 @@ public class TicketController {
 	@Autowired
 	TicketService ticketService;
 	
-	@GetMapping("/{id}/tickets")
 	@RequestMapping(value = "/tickets", produces = "application/json")
 	public List<Ticket> getTickets() {
 		return this.ticketService.getTickets();
+	}
+	
+	@RequestMapping(value = "/tickets/{id}", method = RequestMethod.GET, produces = "application/json")
+	public Ticket getTicket(@PathVariable("id") Integer id) {
+		return ticketService.findById(id).orElse(null);
 	}
 
 	@RequestMapping(value = "/tickets/{id}", method = RequestMethod.PUT, produces = "application/json")
@@ -34,6 +38,8 @@ public class TicketController {
 
 		return ticketService.updateTicket(id, ticket);
 	}
+	
+
 
 	@RequestMapping(value = "/tickets/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	public void delete(@PathVariable("id") String id) {

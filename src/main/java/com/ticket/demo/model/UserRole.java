@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ticket.demo.enumerations.RoleEnum;
 
 @Entity
@@ -27,6 +29,7 @@ public class UserRole {
 	@Enumerated(EnumType.STRING)
 	private RoleEnum role;
 	
+	@JsonBackReference("user-roles")
 	@ManyToOne //(cascade = CascadeType.ALL) 
 	@JoinColumn(name= "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name="fk_userrole_user"))
 	private User user;
@@ -39,9 +42,10 @@ public class UserRole {
 		
 	}
 
-	public UserRole(RoleEnum role, Company company) {
+	public UserRole(RoleEnum role, Company company, User user) {
 		this.company = company;
 		this.role = role;
+		this.user = user;
 	}
 
 	public Integer getId() {
