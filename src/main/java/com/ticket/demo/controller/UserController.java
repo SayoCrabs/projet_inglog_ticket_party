@@ -43,7 +43,7 @@ public class UserController {
 		return new ResponseEntity<>("User is updated successsfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	public ResponseEntity<Object> delete(@PathVariable("id") String id) {
 
 		userService.deleteUser(Integer.parseInt(id));
