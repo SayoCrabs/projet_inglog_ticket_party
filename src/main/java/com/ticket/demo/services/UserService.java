@@ -17,4 +17,6 @@ public interface UserService {
 
 	Optional<User> findById(Integer id);
 
+	User getAuthenticateUser(String email, String password);
+
 }

@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ticket.demo.enumerations.SexeEnum;
  
@@ -33,7 +32,7 @@ public class User {
 	
 	private String email ;
 	
-	private String pasword;
+	private String password;
 	
 	private Integer age;
 	
@@ -100,12 +99,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPasword() {
-		return pasword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasword(String pasword) {
-		this.pasword = pasword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Integer getAge() {

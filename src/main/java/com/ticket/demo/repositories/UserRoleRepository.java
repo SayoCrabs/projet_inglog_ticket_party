@@ -6,4 +6,5 @@ import com.ticket.demo.model.UserRole;
 
 public interface UserRoleRepository extends JpaRepository<UserRole, Integer> {
 
+	
 }
