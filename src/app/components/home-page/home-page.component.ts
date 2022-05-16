@@ -129,9 +129,9 @@ export class HomePageComponent implements OnInit {
 
   buyTicket(user: User, ticket: Ticket) {
     const invoiceReq = new Invoice();
+    invoiceReq.numberInvoice = 134;
     invoiceReq.dateFacture = new Date(Date.now());
     invoiceReq.client = new User(user);
-    invoiceReq.invoiceItems = new InvoiceItem(ticket, this.nbToBuyCtrl.value);
 
     this.store.dispatch(new CreateInvoice(invoiceReq));
   }

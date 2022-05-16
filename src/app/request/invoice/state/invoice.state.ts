@@ -72,6 +72,7 @@ export class InvoiceState extends GenericState
 
   CreateInvoiceSuccess(ctx: StateContext<InvoiceStateModel>, invoice: Invoice)
   {
+    console.log(invoice);
     return ctx.patchState({
       creating: false,
       created: true,
