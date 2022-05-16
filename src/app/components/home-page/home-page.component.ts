@@ -12,6 +12,7 @@ import {User} from "../../utils/models/user";
 import {InvoiceItem} from "../../utils/models/InvoiceItem";
 import {FormControl} from "@angular/forms";
 import {CreateInvoice} from "../../request/invoice/action/invoice.action";
+import {UpdateUser} from "../../request/connection/action/connection.action";
 
 @Component({
   selector: 'app-home-page',
@@ -128,11 +129,13 @@ export class HomePageComponent implements OnInit {
   }
 
   buyTicket(user: User, ticket: Ticket) {
-    const invoiceReq = new Invoice();
+
+    let invoiceReq = new Invoice();
     invoiceReq.numberInvoice = 134;
     invoiceReq.dateFacture = new Date(Date.now());
     invoiceReq.client = new User(user);
 
     this.store.dispatch(new CreateInvoice(invoiceReq));
+
   }
 }

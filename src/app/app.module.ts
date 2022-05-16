@@ -33,6 +33,7 @@ import {TicketService} from "./request/ticket/service/ticket.service";
 import { UserAccountComponent } from './components/user-account/user-account.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import {ConnectionService} from "./request/connection/service/connection.service";
+import {InvoiceService} from "./request/invoice/service/invoice.service";
 
 const material = [ MatCardModule,
   MatDialogModule,
@@ -74,7 +75,7 @@ const components = [AppComponent,
         MatDatepickerModule,
         ReactiveFormsModule
     ],
-  providers: [ FormService, TicketService, ConnectionService ],
+  providers: [ FormService, TicketService, ConnectionService, InvoiceService ],
   exports: [ RouterModule, ...components ],
   bootstrap: [ AppComponent ]
 })

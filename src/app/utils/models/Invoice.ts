@@ -13,16 +13,17 @@ export class Invoice
 
   invoiceItems: InvoiceItem | undefined;
 
-  price: number = 3;
-
   constructor(invoice?: Invoice)
   {
     if(invoice)
     {
+      const invoiceItemRequest = new InvoiceItem();
+      invoiceItemRequest.quantity = invoice.invoiceItems?.quantity;
+      invoiceItemRequest.ticket = invoice.invoiceItems?.ticket;
+
       this.dateFacture = invoice.dateFacture;
       this.client = new User(invoice.client);
-      this.invoiceItems = new InvoiceItem(invoice.invoiceItems?.ticket, invoice.invoiceItems?.quantity);
-      this.price = 3;
+      this.invoiceItems = invoiceItemRequest;
     }
   }
 

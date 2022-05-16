@@ -7,16 +7,10 @@ export class InvoiceItem
 
   quantity: number | undefined;
 
-  invoice: Invoice | undefined | null;
+  invoice: Invoice | undefined;
 
   ticket: Ticket | undefined;
 
-  price: number = 2;
-
-  constructor(ticket: Ticket | undefined, nbBuy: number = 1) {
-    this.ticket = ticket;
-    this.quantity = nbBuy;
-    this.price = 2;
-    this.invoice = null;
+  constructor() {
   }
 }
