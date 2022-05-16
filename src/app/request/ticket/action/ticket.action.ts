@@ -19,7 +19,7 @@ export class UpdateTicket
 {
   static readonly type = UPDATE_TICKET;
 
-  constructor(public id: number, public changes: Partial<Ticket>)
+  constructor(public id: number, public changes: Ticket)
   {
   }
 }

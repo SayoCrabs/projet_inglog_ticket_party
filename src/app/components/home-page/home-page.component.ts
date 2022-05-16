@@ -22,15 +22,25 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new LoadAllTickets());
 
+
     if(localStorage.getItem('isProUserOrUser') === null)
     {
       localStorage.setItem('isProUserOrUser', 'visitor');
     }
   }
 
+  ngOnDestroy()
+  {
+
+  }
+
   isProUser(): boolean
   {
     return localStorage.getItem('isProUserOrUser') === 'proUser';
+  }
+
+  test(ticket:Ticket): string{
+    return ticket.title;
   }
 
   /**
@@ -41,7 +51,7 @@ export class HomePageComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateFormComponent, {
       width: '500px',
       height: '100%',
-      data: {name: "Nouveau Ticket", formToLoad : 'form.json', type: 1},
+      data: {name: "Nouveau Ticket", formToLoad : 'Ticket', type: 1},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -53,17 +63,22 @@ export class HomePageComponent implements OnInit {
     this.store.dispatch(new DeleteTicket(ticket));
   }
 
-  updateNumberTicket(nb: string, ticketId: number)
+  updateNumberTicket(ticket: Ticket, nb: string )
   {
-    this.store.dispatch(new UpdateTicket(ticketId, { quantite: Number(nb)}));
+    this.store.dispatch(new UpdateTicket(ticket.id, ticket));
   }
 
-  updatePriceTicket(nb: string, ticketId: number)
+  updatePriceTicket(ticket: Ticket,nb: string)
   {
-    this.store.dispatch(new UpdateTicket(ticketId, { price: Number(nb)}));
+    /**
+     * a voir avec le code du boulot
+     */
+    let newT = ticket;
+    newT.price = Number(nb);
+    this.store.dispatch(new UpdateTicket(ticket.id, newT));
   }
 
-  updateAddress(address: string, ticketId: number) {
-    this.store.dispatch(new UpdateTicket(ticketId, { address: address}));
+  updatePosition(ticket: Ticket,position: string) {
+    this.store.dispatch(new UpdateTicket(ticket.id, ticket));
   }
 }

@@ -4,15 +4,11 @@ export class Ticket
 {
   public id: number = 0;
 
-  public title: string | undefined;
-
-  public entreprise: string | undefined;
+  public title: string = '';
 
   public price: number | undefined;
 
   public quantite: number = 0;
-
-  public address: string | undefined;
 
   public startDate : Date | undefined;
 
@@ -24,16 +20,15 @@ export class Ticket
 
   public category: Category;
 
-  constructor(newTicket: Ticket) {
+  constructor(newTicket: Ticket, desc: string) {
     this.id = newTicket.id;
     this.title = newTicket.title;
-    this.entreprise = newTicket.entreprise;
     this.price = newTicket.price;
     this.quantite = newTicket.quantite;
-    this.address = newTicket.address;
     this.startDate = newTicket.startDate;
     this.endDate = newTicket.endDate;
+    this.position = newTicket.position;
     this.limitAge = newTicket.limitAge;
-    this.category = newTicket.category;
+    this.category = new Category(desc);
   }
 }

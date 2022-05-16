@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Ticket} from "../../../utils/models/Ticket";
-import {httpUrl} from "../../../utils/constant";
+import {httpUrl} from "../../../utils/constant/constant";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import {httpUrl} from "../../../utils/constant";
 export class TicketService {
 
   url = httpUrl + 'tickets';
+
   constructor(private http: HttpClient) {
   }
 
@@ -28,8 +29,8 @@ export class TicketService {
     return this.http.post<Ticket>(this.url, ticket);
   }
 
-  public updateTicket(ticketId: number, ticket: Partial<Ticket>): Observable<Ticket>
+  public updateTicket(ticketId: number, ticket: Ticket): Observable<Ticket>
   {
-    return this.http.put<Ticket>(this.url + ticketId, ticket);
+    return this.http.put<Ticket>(this.url + '/' + ticketId, ticket);
   }
 }

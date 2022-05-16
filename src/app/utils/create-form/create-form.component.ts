@@ -4,7 +4,7 @@ import {FormState} from "../../request/form/state/form.state";
 import {Observable} from "rxjs";
 import {LoadFormFields} from "../../request/form/action/form.action";
 import {Field} from "../models/field";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Ticket} from "../models/Ticket";
 import {CreateTicket} from "../../request/ticket/action/ticket.action";
@@ -41,7 +41,7 @@ export class CreateFormComponent implements OnInit {
     this.form$?.subscribe(value => {
       value.forEach(v => this.dynamicFormGroup.addControl(v.name, new FormControl('', Validators.required)))
     });
-    console.log(this.dynamicFormGroup)
+    console.log(this.dynamicFormGroup);
   }
 
   /**
@@ -55,8 +55,10 @@ export class CreateFormComponent implements OnInit {
   createTicket()
   {
     console.log("create ticket");
+  console.log(this.dynamicFormGroup.getRawValue());
     // call the action for create ticket
-    let ticketRequest = new Ticket(this.dynamicFormGroup.getRawValue());
+    let ticketRequest = new Ticket(this.dynamicFormGroup.getRawValue(), this.dynamicFormGroup.controls['category'].value);console.log(ticketRequest.category);
+
     this.store.dispatch(new CreateTicket(ticketRequest));
     console.log(ticketRequest);
 
@@ -68,7 +70,6 @@ export class CreateFormComponent implements OnInit {
     // call the action for create user
     let userRequest = new User(this.dynamicFormGroup.getRawValue());
     this.store.dispatch(new CreateUser(userRequest));
-    // a terme il faudrait qu'on ai un moyen de savoir si on doit creer un user simple ou un pro
   }
 
 

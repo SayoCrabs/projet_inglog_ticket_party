@@ -2,12 +2,12 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Field} from "../../../utils/models/field";
-import {httpUrl} from "../../../utils/constant";
+import {httpUrl} from "../../../utils/constant/constant";
 
 @Injectable({ providedIn: 'root' })
 export class FormService {
-  url = httpUrl;
 
+  url = httpUrl + 'entity/';
   constructor(private http: HttpClient ) {
   }
 
