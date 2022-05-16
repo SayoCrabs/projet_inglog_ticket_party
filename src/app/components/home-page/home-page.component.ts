@@ -14,7 +14,6 @@ import {CreateFormComponent} from "../../utils/create-form/create-form.component
 })
 export class HomePageComponent implements OnInit {
 
-
   @Select(TicketState.tickets) tickets$: Observable<Ticket[]> | undefined ;
 
   constructor(public store: Store, public dialog: MatDialog) { }

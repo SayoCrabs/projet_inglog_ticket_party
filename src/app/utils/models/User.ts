@@ -5,7 +5,7 @@ import {UserRole} from "./UserRole";
 
 export class User
 {
-  id: number | undefined;
+  id: string = '';
 
   name: string | undefined;
 
@@ -15,9 +15,9 @@ export class User
 
   password: string | undefined;
 
-  age: number | undefined;
+  age: number = 0;
 
-  dateOfBirth: Date | undefined;
+  dateOfBirth: Date;
 
   address: string | undefined;
 

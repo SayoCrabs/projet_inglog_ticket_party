@@ -24,11 +24,13 @@
 
       <app-edit-field [title]="'Prix :'"
                       [value]="ticket.price"
+                      [type]="'number'"
                       [isEditable]="isProUser()"
                       (contentWhileEditingChange)="updatePriceTicket(ticket, $event)"></app-edit-field>
 
       <app-edit-field [title]="'Nombre de ticket en vente :'"
                       [value]="ticket.quantite"
+                      [type]="'number'"
                       [isEditable]="isProUser()"
                       (contentWhileEditingChange)="updateNumberTicket(ticket, $event)"></app-edit-field>
 
@@ -39,6 +41,7 @@
 
       <app-edit-field [title]="'Limit d age :'"
                       [value]="ticket.limitAge"
+                      [type]="'number'"
                       [isEditable]="isProUser()"
                       (contentWhileEditingChange)="updateLimitAge(ticket, $event)"></app-edit-field>
 

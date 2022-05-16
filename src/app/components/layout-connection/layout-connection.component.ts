@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
+import {Store} from "@ngxs/store";
+import {CheckUser} from "../../request/connection/action/connection.action";
+import {FormControl} from "@angular/forms";
+import {InputFieldComponent} from "../../utils/input-field/input-field.component";
 
 @Component({
   selector: 'app-layout-connection',
@@ -8,16 +12,19 @@ import {Router} from "@angular/router";
 })
 export class LayoutConnectionComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  public emailCtrl = new FormControl();
+  public passwordCtrl = new FormControl();
+  constructor(public router: Router, private store: Store) { }
 
   ngOnInit(): void {
   }
 
+  /**
+   * check on bdd user if the user exist
+   */
   connectForUser() {
-    /**
-     * check on bdd user if the user exist
-     */
     localStorage.setItem('isProUserOrUser', 'user');
+    this.store.dispatch(new CheckUser(this.emailCtrl.value, this.passwordCtrl.value));
   }
 
   connectForProUser() {

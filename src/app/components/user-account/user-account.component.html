@@ -1,7 +1,50 @@
 <div align='center' *ngIf="user$ | async as user">
-  <mat-card-title>{{ user.name }} {{ user.firstname }}</mat-card-title>
+  <mat-card-title> Mon Compte </mat-card-title>
   <mat-divider></mat-divider>
 
+  <mat-divider inset></mat-divider>
+
+  <app-edit-field [title]="'Nom :'"
+                  [value]="user.name"
+                  [isEditable]="true"
+                  (contentWhileEditingChange)="updateName(user, $event)"></app-edit-field>
+
+  <app-edit-field [title]="'Prénom :'"
+                  [value]="user.firstname"
+                  (contentWhileEditingChange)="updateFirstName(user, $event)"></app-edit-field>
+
+  <app-edit-field [title]="'Age :'"
+                  [value]="user.age"
+                  [type]="'number'"
+                  [isEditable]="true"
+                  (contentWhileEditingChange)="updateAge(user, $event)"></app-edit-field>
+
+  <app-edit-field [title]="'Date de naissance :'"
+                  [value]="getDate(user.dateOfBirth)"
+                  [type]="'Date'"
+                  [isEditable]="true"
+                  (contentWhileEditingChange)="updateBirthDate(user, $event)"></app-edit-field>
+
+  <app-edit-field [title]="'Adresse :'"
+                  [value]="user.address"
+                  [isEditable]="true"
+                  (contentWhileEditingChange)="updateAddress(user, $event)"></app-edit-field>
+
+  <mat-divider inset></mat-divider>
+
+  <app-edit-field [title]="'Email :'"
+                  [value]="user.email"
+                  [isEditable]="true"
+                  (contentWhileEditingChange)="updateEmail(user, $event)"></app-edit-field>
+
+  <app-edit-field [title]="'Password :'"
+                  [value]="user.password"
+                  [isEditable]="true"
+                  (contentWhileEditingChange)="updatePassword(user, $event)"></app-edit-field>
+
+  <mat-card-actions>
+    <app-button routerLink="/connection" [colorBtn]="'red'" (clickMethod)="removeAccount(user)" [textButton]="'Supprimer mon compte'"></app-button>
+  </mat-card-actions>
 </div>
 
 

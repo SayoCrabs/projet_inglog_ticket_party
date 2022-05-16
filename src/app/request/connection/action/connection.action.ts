@@ -35,7 +35,7 @@ export class UpdateUser
 {
   static readonly type = UPDATE_USER;
 
-  constructor(public id: string, public changes: Partial<User>)
+  constructor(public id: string, public changes: User)
   {
   }
 }
