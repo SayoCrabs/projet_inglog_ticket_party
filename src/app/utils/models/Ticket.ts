@@ -2,11 +2,11 @@ import {Category} from "./Category";
 
 export class Ticket
 {
-  public id: string = '';
+  public id: string = '0';
 
   public title: string = '';
 
-  public price: number | undefined;
+  public price: number;
 
   public quantite: number = 0;
 
@@ -20,7 +20,7 @@ export class Ticket
 
   public category: Category;
 
-  constructor(newTicket: Ticket, desc: string = '') {
+  constructor(newTicket: Ticket, desc?: string) {
     console.log(newTicket);
     this.id = newTicket.id;
     this.title = newTicket.title;
@@ -30,7 +30,7 @@ export class Ticket
     this.endDate = newTicket.endDate;
     this.position = newTicket.position;
     this.limitAge = newTicket.limitAge;
-    this.category = new Category(desc);
+     this.category = !!desc ? new Category(desc) : newTicket.category;
   }
 
   modify(ticket:Ticket, value: string)

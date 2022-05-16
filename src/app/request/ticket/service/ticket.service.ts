@@ -36,7 +36,7 @@ export class TicketService {
   public updateTicket(ticketId: string, ticket: Ticket): Observable<Ticket>
   {
     return this.http.put<Ticket>(this.url + '/' + ticketId, ticket).pipe(
-      map((upd: Ticket) => Object.assign(new Ticket(upd, upd.category.description), upd))
+      map((upd: Ticket) => Object.assign(new Ticket(upd), upd))
     );
   }
 }

@@ -31,6 +31,8 @@ import { TextFieldComponent } from './utils/text-field/text-field.component';
 import { EditFieldComponent } from './utils/edit-field/edit-field.component';
 import {TicketService} from "./request/ticket/service/ticket.service";
 import { UserAccountComponent } from './components/user-account/user-account.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import {ConnectionService} from "./request/connection/service/connection.service";
 
 const material = [ MatCardModule,
   MatDialogModule,
@@ -55,7 +57,8 @@ const components = [AppComponent,
     ButtonComponent,
     TextFieldComponent,
     EditFieldComponent,
-    UserAccountComponent
+    UserAccountComponent,
+    InvoiceComponent
   ],
     imports: [
         BrowserModule,
@@ -71,7 +74,7 @@ const components = [AppComponent,
         MatDatepickerModule,
         ReactiveFormsModule
     ],
-  providers: [ FormService, TicketService ],
+  providers: [ FormService, TicketService, ConnectionService ],
   exports: [ RouterModule, ...components ],
   bootstrap: [ AppComponent ]
 })

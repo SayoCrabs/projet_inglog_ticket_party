@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {httpUrl} from "../../../utils/constant/constant";
 import {Invoice} from "../../../utils/models/Invoice";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
 
-  url = httpUrl + 'tickets';
+  url = httpUrl + 'invoices';
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +27,8 @@ export class InvoiceService {
 
   public createInvoice(invoice: Invoice): Observable<Invoice>
   {
-    return this.http.post<Invoice>(this.url, invoice);
+    return this.http.post<Invoice>(this.url, invoice).pipe(
+      map((i: Invoice) => Object.assign(new Invoice(i), i)));
   }
 
   public updateInvoice(invoiceId: number, invoice: Invoice): Observable<Invoice>

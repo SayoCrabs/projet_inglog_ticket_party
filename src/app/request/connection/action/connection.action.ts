@@ -2,7 +2,7 @@ import {User} from "../../../utils/models/user";
 
 export const CHECK_USER_EXIST = '[User] Check user exist';
 export const LOAD_USER = '[User] Load user';
-export const CREATE_USER = '[CreateUser] Create user';
+export const CREATE_USER = '[User] Create user';
 export const UPDATE_USER = '[User] Update user';
 export const DELETE_USER = '[User] Delete user';
 export const DISCONNECT_USER = '[User] Disconnect user';

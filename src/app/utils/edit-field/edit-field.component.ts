@@ -38,7 +38,6 @@ export class EditFieldComponent implements OnInit {
   }
 
   validateValue() {
-    console.log("control :" , this.control.value);
     this.contentWhileEditingChange.emit(this.control.value);
     this.switchEditMode();
   }

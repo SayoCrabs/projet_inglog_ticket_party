@@ -5,7 +5,7 @@ import {UserRole} from "./UserRole";
 
 export class User
 {
-  id: string = '';
+  id: string = '0';
 
   name: string | undefined;
 
@@ -17,11 +17,9 @@ export class User
 
   age: number = 0;
 
-  dateOfBirth: Date;
+  dateOfbirth: Date;
 
   address: string | undefined;
-
-  compagny: Compagny | undefined;
 
   sexe: SexeEnum | undefined;
 
@@ -30,14 +28,15 @@ export class User
   role: UserRole | undefined;
 
   constructor(user: User) {
+    console.log(user);
+    this.id = user.id;
     this.name = user.name;
     this.firstname = user.firstname;
     this.email = user.email;
     this.password = user.password;
     this.age = user.age;
-    this.dateOfBirth = user.dateOfBirth;
+    this.dateOfbirth = user.dateOfbirth;
     this.address = user.address;
-    this.compagny = user.compagny;
     this.sexe = user.sexe;
   }
 }

@@ -8,8 +8,9 @@ export class Category
 
   public tickets: Ticket[] | undefined;
 
-  constructor(ticket: string) {
-    this.description = ticket;
+  constructor(desc: string) {
+    this.description = desc;
+    // at the creation we can't now the number of tickets
     this.tickets = [];
   }
 

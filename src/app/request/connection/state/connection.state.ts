@@ -57,6 +57,7 @@ export class ConnectionState extends GenericState
 
   GetUserByEmailAndPasswordSuccess(ctx: StateContext<ConnectionStateModel>, user: User)
   {
+    console.log(user);
     return ctx.patchState({
       user: user,
       ...GenericState.success()
@@ -83,7 +84,7 @@ export class ConnectionState extends GenericState
   // region CREATE
 
   @Action(CreateUser)
-  CreateTicket(ctx: StateContext<ConnectionStateModel>, action: CreateUser)
+  CreateUser(ctx: StateContext<ConnectionStateModel>, action: CreateUser)
   {
     ctx.patchState({
       creating: true,
@@ -91,13 +92,13 @@ export class ConnectionState extends GenericState
     });
 
     return this.connectionService.createUser(action.req).pipe(
-      map((user: User) => this.CreateUserSuccess(ctx, user)),
-      catchError((error: any) => of(this.CreateUserError(ctx, error)))
+      map((user: User) => this.CreateUserSuccess(ctx, user))
     );
   }
 
   CreateUserSuccess(ctx: StateContext<ConnectionStateModel>, user: User)
   {
+    console.log("oui", user);
     return ctx.patchState({
       creating: false,
       created: true,
@@ -120,7 +121,8 @@ export class ConnectionState extends GenericState
   @Action(DeleteUser)
   DeleteUser(ctx: StateContext<ConnectionStateModel>, action: DeleteUser)
   {
-    return this.connectionService.deleteUser(action.userId);
+    this.connectionService.deleteUser(action.userId);
+    this.ResetUser(ctx);
   }
 
   @Action(UpdateUser)

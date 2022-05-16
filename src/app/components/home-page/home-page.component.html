@@ -52,6 +52,12 @@
         <mat-icon>delete</mat-icon>
       </button>
     </div>
+    <div *ngIf="user$ | async as user" class="d-flex justify-content-end my-4">
+      <app-input-field [type]="'number'" [control]="nbToBuyCtrl" [title]="'Quantite voulu : '"></app-input-field>
+      <button class="btn-flat" (click)="buyTicket(user, ticket)">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </div>
   </mat-card>
 
 </ng-container>

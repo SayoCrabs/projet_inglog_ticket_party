@@ -11,6 +11,7 @@
 
   <app-edit-field [title]="'Prénom :'"
                   [value]="user.firstname"
+                  [isEditable]="true"
                   (contentWhileEditingChange)="updateFirstName(user, $event)"></app-edit-field>
 
   <app-edit-field [title]="'Age :'"
@@ -20,7 +21,7 @@
                   (contentWhileEditingChange)="updateAge(user, $event)"></app-edit-field>
 
   <app-edit-field [title]="'Date de naissance :'"
-                  [value]="getDate(user.dateOfBirth)"
+                  [value]="getDate(user.dateOfbirth)"
                   [type]="'Date'"
                   [isEditable]="true"
                   (contentWhileEditingChange)="updateBirthDate(user, $event)"></app-edit-field>
@@ -37,8 +38,9 @@
                   [isEditable]="true"
                   (contentWhileEditingChange)="updateEmail(user, $event)"></app-edit-field>
 
-  <app-edit-field [title]="'Password :'"
+  <app-edit-field [title]="'Password : '"
                   [value]="user.password"
+                  [type]="'password'"
                   [isEditable]="true"
                   (contentWhileEditingChange)="updatePassword(user, $event)"></app-edit-field>
 

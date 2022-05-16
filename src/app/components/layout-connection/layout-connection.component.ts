@@ -24,7 +24,7 @@ export class LayoutConnectionComponent implements OnInit {
    */
   connectForUser() {
     localStorage.setItem('isProUserOrUser', 'user');
-    this.store.dispatch(new CheckUser(this.emailCtrl.value, this.passwordCtrl.value));
+    this.connectAUser();
   }
 
   connectForProUser() {
@@ -32,6 +32,11 @@ export class LayoutConnectionComponent implements OnInit {
      * check on bdd proUser if the pro user exist
      */
     localStorage.setItem('isProUserOrUser', 'proUser');
+    this.connectAUser();
+  }
+
+  connectAUser() {
+    this.store.dispatch(new CheckUser(this.emailCtrl.value, this.passwordCtrl.value));
   }
 
 }

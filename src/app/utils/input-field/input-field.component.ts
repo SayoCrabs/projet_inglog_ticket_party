@@ -23,6 +23,11 @@ export class InputFieldComponent implements OnInit {
 
   getType(): string
   {
+    if(this.title == 'pasword')
+    {
+      this.type = 'password';
+    }
+
     switch(this.type)
     {
       case 'Integer': {

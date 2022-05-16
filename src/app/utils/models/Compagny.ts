@@ -1,6 +1,7 @@
 export class Compagny
 {
-  public id: number | undefined;
+  public id: number = 0;
 
   public name: string | undefined;
+
 }

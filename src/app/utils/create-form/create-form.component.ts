@@ -27,48 +27,47 @@ export class CreateFormComponent implements OnInit {
   @Select(FormState.form) form$: Observable<Field[]> | undefined;
   @Output() submitMethod: EventEmitter<any> = new EventEmitter();
 
-  dynamicFormGroup = new FormGroup({}) ;
-
-  formFields: Field[] = [];
+  dynamicFormGroup = new FormGroup({});
 
   constructor(private store: Store,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
-  ngOnInit(): void
-  {
-    if(!!this.data.formToLoad) this.store.dispatch(new LoadFormFields(this.data.formToLoad));
+  ngOnInit(): void {
+    if (!!this.data.formToLoad) this.store.dispatch(new LoadFormFields(this.data.formToLoad));
 
     this.form$?.subscribe(value => {
-      value.forEach(v => this.dynamicFormGroup.addControl(v.name, new FormControl('', Validators.required)))
+      value.forEach(v => {
+          if (v.name != 'id' && v.type != 'Set') {
+            this.dynamicFormGroup.addControl(v.name, new FormControl('', Validators.required));
+          }
+        }
+      )
     });
-    console.log(this.dynamicFormGroup);
   }
 
   /**
    * here we distinct the method when submit a form
    */
-  submit()
-  {
-    this.data.type == 1 ? this.createTicket(): this.createNewUser();
+  submit() {
+    this.data.type == 1 ? this.createTicket() : this.createNewUser();
   }
 
-  createTicket()
-  {
+  createTicket() {
     console.log("create ticket");
-  console.log(this.dynamicFormGroup.getRawValue());
-    // call the action for create ticket
-    let ticketRequest = new Ticket(this.dynamicFormGroup.getRawValue(), this.dynamicFormGroup.controls['category'].value);console.log(ticketRequest.category);
+
+    let ticketRequest = new Ticket(this.dynamicFormGroup.getRawValue(), this.dynamicFormGroup.controls['category'].value);
 
     this.store.dispatch(new CreateTicket(ticketRequest));
-    console.log(ticketRequest);
 
   }
 
-  createNewUser()
-  {
+  createNewUser() {
     console.log("create user");
-    // call the action for create user
+
     let userRequest = new User(this.dynamicFormGroup.getRawValue());
+    userRequest.sexe = this.dynamicFormGroup.controls['sexe'].value === 'F' ? 1 : 0;
+
     this.store.dispatch(new CreateUser(userRequest));
   }
 

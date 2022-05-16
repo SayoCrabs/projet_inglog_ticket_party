@@ -6,6 +6,12 @@ import {TicketState} from "../../request/ticket/state/ticket.state";
 import {DeleteTicket, LoadAllTickets, UpdateTicket} from "../../request/ticket/action/ticket.action";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateFormComponent} from "../../utils/create-form/create-form.component";
+import {Invoice} from "../../utils/models/Invoice";
+import {ConnectionState} from "../../request/connection/state/connection.state";
+import {User} from "../../utils/models/user";
+import {InvoiceItem} from "../../utils/models/InvoiceItem";
+import {FormControl} from "@angular/forms";
+import {CreateInvoice} from "../../request/invoice/action/invoice.action";
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +20,10 @@ import {CreateFormComponent} from "../../utils/create-form/create-form.component
 })
 export class HomePageComponent implements OnInit {
 
-  @Select(TicketState.tickets) tickets$: Observable<Ticket[]> | undefined ;
+  @Select(TicketState.tickets) tickets$: Observable<Ticket[]> | undefined;
+  @Select(ConnectionState.user) user$: Observable<User> | undefined;
+
+  nbToBuyCtrl = new FormControl();
 
   constructor(public store: Store, public dialog: MatDialog) { }
 
@@ -116,5 +125,14 @@ export class HomePageComponent implements OnInit {
   getDate(date: Date): string {
     const d = new Date(date);
     return d.toDateString();
+  }
+
+  buyTicket(user: User, ticket: Ticket) {
+    const invoiceReq = new Invoice();
+    invoiceReq.dateFacture = new Date(Date.now());
+    invoiceReq.client = new User(user);
+    invoiceReq.invoiceItems = new InvoiceItem(ticket, this.nbToBuyCtrl.value);
+
+    this.store.dispatch(new CreateInvoice(invoiceReq));
   }
 }

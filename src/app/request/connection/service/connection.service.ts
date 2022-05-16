@@ -9,12 +9,13 @@ import {map} from "rxjs/operators";
 export class ConnectionService {
 
   url = httpUrl + 'users';
+  urlAuth = httpUrl + 'users/authenticate?email=';
   constructor(private http: HttpClient ) {
   }
 
-  public getUserByEmailAndPassword(name: string, password: string): Observable<User>
+  public getUserByEmailAndPassword(email: string, password: string): Observable<User>
   {
-    return this.http.get<User>(this.url + name + password).pipe(
+    return this.http.get<User>(this.urlAuth + email+ '&password=' + password).pipe(
       map((u: User) => Object.assign(new User(u), u)));
   }
 

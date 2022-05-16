@@ -70,7 +70,7 @@ export class UserAccountComponent implements OnInit {
 
   updateBirthDate(user: User, value: string) {
     const userReq = new User(user);
-    userReq.dateOfBirth = new Date(value);
+    userReq.dateOfbirth = new Date(value);
     this.updateUser(userReq);
   }
 

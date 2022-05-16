@@ -5,7 +5,7 @@
     <app-button routerLink="/connection" class="btnConnect" [textButton]="'Connection'"></app-button>
     <app-button routerLink="/connection" (clickMethod)="signIn()" [textButton]="'Inscription'"></app-button>
   </div>
-  <div *ngIf="!(user$ | async)">
+  <div *ngIf="user$ | async">
     <app-button class="btnConnect" (clickMethod)="userAccount()" [textButton]="'Mon Profil'"></app-button>
     <app-button routerLink="/connection" (clickMethod)="disconnect()" [textButton]="'Deconnection'" [colorBtn]="'red'"></app-button>
   </div>

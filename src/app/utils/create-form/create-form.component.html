@@ -3,12 +3,14 @@
   <mat-divider></mat-divider>
   <form [formGroup]="dynamicFormGroup">
     <section *ngFor="let field of form$ | async">
-      <app-edit-field [isEditable]="true" [formInput]="true"
-                      [control]="$any(dynamicFormGroup).controls[field.name]"
-                      [title]="field.name"
-                      [classForm]="'outline'"
-                      [type]="field.type">
-      </app-edit-field>
+      <section *ngIf="field.type != 'Set' && field.name != 'id'">
+        <app-edit-field [isEditable]="true" [formInput]="true"
+                        [control]="$any(dynamicFormGroup).controls[field.name]"
+                        [title]="field.name"
+                        [classForm]="'outline'"
+                        [type]="field.type">
+        </app-edit-field>
+      </section>
     </section>
 
     <mat-divider></mat-divider>
