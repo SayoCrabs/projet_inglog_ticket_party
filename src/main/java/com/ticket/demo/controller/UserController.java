@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.ticket.demo.services.UserService;
 
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class UserController {
 	@Autowired
 	UserService userService;
@@ -40,7 +42,7 @@ public class UserController {
 		return new ResponseEntity<>("User is deleted successsfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	@RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		userService.createUser(user);
 		return new ResponseEntity<User>(HttpStatus.CREATED);

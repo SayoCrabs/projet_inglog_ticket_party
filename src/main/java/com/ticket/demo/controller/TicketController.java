@@ -29,10 +29,10 @@ public class TicketController {
 		return this.ticketService.getTickets();
 	}
 
-	@RequestMapping(value = "/tickets", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateTicket(@RequestBody Ticket ticket) {
+	@RequestMapping(value = "/tickets/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateTicket(@PathVariable("id") String id, @RequestBody Ticket ticket) {
 
-		ticketService.updateTicket(ticket);
+		ticketService.updateTicket(id, ticket);
 		return new ResponseEntity<>("Ticket is updated successsfully", HttpStatus.OK);
 	}
 
@@ -48,7 +48,7 @@ public class TicketController {
 		return ticketService.searchTicketByTitle(title);
 	}
 
-	@RequestMapping(value = "/tickets", method = RequestMethod.POST)
+	@RequestMapping(value = "/tickets", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
 		ticketService.createTicket(ticket);
 		return new ResponseEntity<Ticket>(HttpStatus.CREATED);
