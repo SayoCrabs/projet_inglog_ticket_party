@@ -36,6 +36,10 @@ export class CreateFormComponent implements OnInit {
   ngOnInit(): void {
     if (!!this.data.formToLoad) this.store.dispatch(new LoadFormFields(this.data.formToLoad));
 
+    /**
+     * Here we create all the formControl for all field
+     * But we don't do that on the id field and the field with type 'Set' because we dont want display it
+     */
     this.form$?.subscribe(value => {
       value.forEach(v => {
           if (v.name != 'id' && v.type != 'Set') {

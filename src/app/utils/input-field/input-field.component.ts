@@ -23,7 +23,7 @@ export class InputFieldComponent implements OnInit {
 
   getType(): string
   {
-    if(this.title == 'pasword')
+    if(this.title == 'password')
     {
       this.type = 'password';
     }
